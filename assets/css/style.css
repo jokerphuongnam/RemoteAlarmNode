@@ -1,0 +1,279 @@
+@charset "UTF-8";
+@import url(font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Passion+One:400");
+* {
+	box-sizing: border-box;
+}
+
+body {
+	color: rgba(255, 255, 255, 0.75);
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* CSS Header */
+
+.header {
+	overflow: hidden;
+	background-color: #20205e;
+	padding: 20px 10px;
+}
+
+.header a {
+	float: left;
+	color: whitesmoke;
+	text-align: center;
+	padding: 10px 50px;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 25px;
+	border-radius: 4px;
+}
+
+.header a.logo {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.header a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+.header a.active {
+	background-color: dodgerblue;
+	color: white;
+}
+
+.header-right {
+	float: right;
+}
+
+.header-center {
+	float: center;
+}
+
+/* Set CSS cơ bản */
+
+@-ms-viewport {
+	width: device-width;
+}
+
+@media screen and (max-width: 480px) {
+	html, body {
+		min-width: 320px;
+	}
+}
+
+body{
+	background: #2c2c32;
+	text-align: center;
+}
+
+.datebox{
+	position: absolute;
+	width: 100px;
+	height: 100px;
+}
+
+.active{
+	background-color: mediumslateblue;
+}
+
+.inactive{
+	background-color:  #2c2c32;;
+}
+
+
+body {
+	background: #202024;
+}
+
+body.is-loading *, body.is-loading *:before, body.is-loading *:after {
+	-moz-animation: none !important;
+	-webkit-animation: none !important;
+	-ms-animation: none !important;
+	animation: none !important;
+	-moz-transition: none !important;
+	-webkit-transition: none !important;
+	-ms-transition: none !important;
+	transition: none !important;
+}
+
+/* Tao các thùng chứa */
+
+.thumbnails {
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	-moz-align-items: stretch;
+	-webkit-align-items: stretch;
+	-ms-align-items: stretch;
+	align-items: stretch;
+	-moz-justify-content: center;
+	-webkit-justify-content: center;
+	-ms-justify-content: center;
+	justify-content: center;
+	-moz-flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+.thumbnails .box {
+	margin: 0 1em 2em 1em;
+	width: 30%;
+}
+
+@media screen and (max-width: 1280px) {
+	.thumbnails .box {
+		width: 45%;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	.thumbnails .box {
+		width: 100%;
+	}
+}
+
+.box {
+	border-radius: 4px;
+	margin-bottom: 2em;
+	background: #2c2c32;
+	text-align: center;
+}
+
+.box> :last-child, .box> :last-child> :last-child, .box> :last-child> :last-child> :last-child {
+	margin-bottom: 0;
+}
+
+.box .image.fit {
+	margin: 0;
+}
+
+.box .image img {
+	border-radius: 4px 4px 0 0;
+}
+
+.box .inner {
+	padding: 1.5em;
+	width: 100% !important;
+}
+
+@media screen and (max-width: 480px) {
+	.box .inner {
+		padding: 1em;
+	}
+}
+
+.box.alt {
+	border: 0;
+	border-radius: 0;
+	padding: 0;
+}
+
+.centerbtn {
+
+	margin: 0;
+	position: absolute;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+
+/* Các nút bấm */
+.btn{
+	border: 1px solid rgb(54, 47, 47);
+	color: rgb(0, 0, 0);
+	padding: 10px;
+	width: 300px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: 0.5s;
+	border-radius: 12px;
+	
+}
+
+.success {background-color: #5cd160;} /* Green */
+.success:hover {background-color: rgb(3, 172, 3);}
+
+.info {background-color: #2196F3;} /* Blue */
+.info:hover {background: #0b7dda;}
+
+.warning {background-color: #ff9800;} /* Orange */
+.warning:hover {background: #e68a00;}
+
+.danger {background-color: #e2574d;} /* Red */ 
+.danger:hover {background:rgb(241, 28, 28);}
+
+.default {background-color: #e7e7e7; color: black;} /* Gray */ 
+.default:hover {background: #ddd;}
+
+/* Main */
+
+#main {
+	padding: 4em 0 2em 0;
+}
+
+@media screen and (max-width: 736px) {
+	#main {
+		padding: 3em 0 1em 0;
+	}
+}
+
+#main .inner {
+	width: 90%;
+	max-width: 80em;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 480px) {
+	#main .inner {
+		width: 95%;
+	}
+}
+
+
+
+
+/* Footer */
+
+#footer {
+	padding: 4em 0 2em 0;
+	background-color: #1b1b1f;
+	text-align: center;
+}
+
+#footer .inner {
+	width: 50%;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 980px) {
+	#footer .inner {
+		width: 75%;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	#footer .inner {
+		width: 90%;
+	}
+}
+
+#footer .copyright {
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 0.9em;
+	margin: 0 0 2em 0;
+	padding: 0;
+	text-align: center;
+}
+
+@media screen and (max-width: 736px) {
+	#footer {
+		padding: 3em 0 1em 0;
+	}
+}

@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+/* CSS Popup Form khi nhấn nút Set Time */
+
+.open-button {
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  width: 280px;
+}
+
+/* Canh form ở giữa */
+
+.form-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Background form */
+
+.form-container {
+  text-align: center;
+  padding: 50px 40px;
+  background-color: rgb(55, 52, 71);
+  border-radius: 12px;
+  line-height: 150%;
+}
+
+/* Ô nhập liệu bình thường */
+
+.form-container input[type=text], .form-container input[type=password] {
+  width: 75%;
+  text-align: center;
+  font-size: 25px;
+  padding: auto;
+  border: none;
+  background: #f1f1f1;
+  border-radius: 12px;
+}
+
+/* Ô nhập liệu khi được select */
+
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+  border-radius: 12px;
+}
+
+/* Nút bấm Set */
+
+.form-container .btn {
+  border: 1px solid rgb(54, 47, 47);
+	color: rgb(0, 0, 0);
+  padding: 16px 32px;
+  margin-bottom: 10px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: 0.5s;
+  border-radius: 12px;
+}
+
+/* Nút bấm Cancel */
+
+.success {background-color: #5cd160;} /* Green */
+.success:hover {background-color: rgb(3, 172, 3);}
+
+.info {background-color: #2196F3;} /* Blue */
+.info:hover {background: #0b7dda;}
+
+.warning {background-color: #ff9800;} /* Orange */
+.warning:hover {background: #e68a00;}
+
+.danger {background-color: #e2574d;} /* Red */ 
+.danger:hover {background:rgb(241, 28, 28);}
+
+.default {background-color: #e7e7e7; color: black;} /* Gray */ 
+.default:hover {background: #ddd;}

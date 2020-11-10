@@ -1,0 +1,22 @@
+{
+  "name": "remotealarm",
+  "version": "1.0.0",
+  "description": "remote alarm",
+  "main": "Main.js",
+  "scripts": {
+    "start": "nodemon Main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cloud",
+    "alarm"
+  ],
+  "author": "d17cn2",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "14.x"
+  }
+}
