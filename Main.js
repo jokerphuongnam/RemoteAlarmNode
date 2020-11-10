@@ -1,53 +1,31 @@
 'use_strict'
 
 var express = require('express');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
 var app = express();
-var url = require('url')
-var fs = require('fs')
+
+// resouce file 
 app.use(express.static(__dirname + '/'));
-app.get('/', function(req, res){
-    fs.readFile('Home.html', function(err, data) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        return res.end();
-      });
-});
 
-app.get('/AboutUs.html', function(req, res){
-    fs.readFile('AboutUs.html', function(err, data) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        return res.end();
-      });
-});
+// for parsing application/json
+app.use(bodyParser.json()); 
 
-app.get('/Lost.html', function(req, res){
-    fs.readFile('Lost.html', function(err, data) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        return res.end();
-      });
-});
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({ extended: true })); 
+//form-urlencoded
 
-app.get('/SignIn.html', function(req, res){
-    fs.readFile('SignIn.html', function(err, data) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        return res.end();
-      });
-});
-
-app.get('/SignUp.html', function(req, res){
-    fs.readFile('SignUp.html', function(err, data) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        return res.end();
-      });
-});
+// for parsing multipart/form-data
+app.use(upload.array()); 
+app.use(express.static('public'));
 
 
+// include router
+var router = require('./router.js');
+app.use('/',router)
 
+// chay server
 app.listen(process.env.PORT || 5000, () => {
     console.log('Server running')
-
 });
