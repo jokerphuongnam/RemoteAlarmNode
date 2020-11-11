@@ -1,109 +1,186 @@
+
 var express = require('express');
 var router = express.Router();
 var admin = require('firebase-admin');
 var serviceAccount = require("./privateKey.json");
 var url = require('url')
 var fs = require('fs')
+const axios = require('axios')
+const { Converter, Alarm } = require('./Alarm.js');
+
+var serverKey = 'key=AAAAhO2bFYw:APA91bEzd3Rmnym3ln5nrDshVka0JuCLDnPJV7lY142_0JKhGJSHVel35nC-L2NzBXsvLK_WzTYEvJCDQoHHJX_EH6ivFb8q2y4xR8AqTRbQoaWJYnQ4sosH-k-3WwNethe0jIVWwWFS';
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://remotealarmclock-2f98a.firebaseio.com"
 });
 
+var token = "fZgGBrzpLBA:APA91bGr1JXwvKMqXmTu6bvfzm1LgL6VKinszgq_nO7_wyN91qCiyiljqdGc9TJHki95MIvBUFYGeLHMYg39gJl2ifS4leCmx6EtwkCc1K7dvviqVDk2EptfxD6LC5o3XIwXMDbG3XjL"
 
-function test() {
-// This registration token comes from the client FCM SDKs.
-var registrationToken = "dCo4K1UUVUI:APA91bFo96cq0IqmIldJAYwuyCrCE8rhjcVMxco7QzEDh9Akhk3OdO0I10HlDpDQL06vNFNME7NvZc44_DaCbJmNZy3O3L0HRakhv7VC8LwWM4qFEhcMKSAx67xprCigLbwpgGPWCyRR"
+let config = {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': serverKey
+  }
+}
 
-var message = {
-  data: {
-    alarmId: '02021999',
-    type: 'insert',
-    hour: '2',
-    minute: '3',
-    title: 'Noi dung tin nhan'
-  },
-  token: registrationToken
-};
+router.get('/', function (req, res) {
+  fs.readFile('Home.html', function (err, data) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(data);
+    return res.end();
+  });
+});
 
-// Send a message to the device corresponding to the provided
-// registration token.
-admin.messaging().send(message)
-  .then((response) => {
-    // Response is a message ID string.
-    console.log('Successfully sent message:', response);
-  })
-  .catch((error) => {
-    console.log('Error sending message:', error);
+router.get('/AboutUs.html', function (req, res) {
+  fs.readFile('AboutUs.html', function (err, data) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(data);
+    return res.end();
+  });
+});
+
+router.get('/Lost.html', function (req, res) {
+  fs.readFile('Lost.html', function (err, data) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(data);
+    return res.end();
+  });
+});
+
+router.get('/SignIn.html', function (req, res) {
+  fs.readFile('SignIn.html', function (err, data) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(data);
+    return res.end();
+  });
+});
+
+router.get('/SignUp.html', function (req, res) {
+  fs.readFile('SignUp.html', function (err, data) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(data);
+    return res.end();
+  });
+});
+///////////////////////////////////////////////mapping update alarm
+router.post('/update.html', function (req, res) {
+  console.log('da vao trong post update route')
+
+
+  let data = req.body
+
+  var time = data.time.toString()
+  console.log(data.title.hour)
+  let hour = parseInt(time.substring(0, 2))
+  let minute = parseInt(time.substring(3, 5))
+  let title = data.title
+  // send request to server
+  let id = data.aid
+
+  let json = {
+    "to": "/topics/remoteAlarm",
+    "data": {
+      "alarmId": id.toString(),
+      "type": "update",
+      "hour": hour.toString(),
+      "minute": minute.toString(),
+      "title": title
+    },
+    "priority": "high"
+  }
+  axios.post('https://fcm.googleapis.com/fcm/send', json, config)
+    .then(res => {
+      console.log(`statusCode: ${res.statusCode}`)
+      //console.log(res)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+
+  admin.firestore().collection("alarms").doc(id.toString()).update({
+    alarmId: parseInt(id),
+    hour: hour,
+    minute: minute,
+    started: true,
+    title: title
   });
 
-}
+  res.redirect('/Home.html');
+});
 
-let db = admin.firestore()
-async function test2() {
-  const cityRef = db.collection('alarms').doc('462012963');
-  const doc = await cityRef.get();
-  if (!doc.exists) {
-    console.log('No such document!');
-  } else {
-    console.log('Document data:', doc.data());
+///////////////////////////////////////////////mapping cancel alarm
+router.get('/cancel/:id', function (req, res) {
+  console.log('da vao trong cancel route')
+  let id = req.params.id
+  console.log(id)
+  let json = {
+    "to": "/topics/remoteAlarm",
+    "data": {
+      "alarmId": id,
+      "type": "cancel"
+    },
+    "priority": "high"
   }
+  axios.post('https://fcm.googleapis.com/fcm/send', json, config)
+    .then(res => {
+      console.log(`statusCode: ${res.statusCode}`)
+      //console.log(res)
+    })
+    .catch(error => {
+      console.error(error)
+    })
 
-}
-test2()
+  admin.firestore().collection("alarms").doc(id).delete()
 
-router.get('/', function(req, res){
-    fs.readFile('Home.html', function(err, data) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        test()
-        return res.end();
-      });
+  res.redirect('/Home.html');
 });
 
-router.get('/AboutUs.html', function(req, res){
-    fs.readFile('AboutUs.html', function(err, data) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        return res.end();
-      });
-});
-
-router.get('/Lost.html', function(req, res){
-    fs.readFile('Lost.html', function(err, data) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        return res.end();
-      });
-});
-
-router.get('/SignIn.html', function(req, res){
-    fs.readFile('SignIn.html', function(err, data) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        return res.end();
-      });
-});
-
-router.get('/SignUp.html', function(req, res){
-    fs.readFile('SignUp.html', function(err, data) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        return res.end();
-      });
-});
-
-router.post('/update.html', function(req, res){
-    console.log('da vao trong post')
-  res.redirect('Home.html');
-});
-
-router.post('/new.html', function(req, res){
+////////////////////////////////////////////////mapping new alarm
+router.post('/new.html', function (req, res) {
   console.log('da vao trong post new')
+  // chuan bi data
+  var id = Math.floor(100000000 + Math.random() * 900000000);
+  console.log(id)
   let data = req.body
-  console.log(data.time)
-  console.log(data.title)
-  res.redirect('Home.html');
+
+  var time = data.time.toString()
+  console.log(data.title.hour)
+  let hour = parseInt(time.substring(0, 2))
+  let minute = parseInt(time.substring(3, 5))
+  let title = data.title
+  // send request to server
+
+
+  let json = {
+    "to": "/topics/remoteAlarm",
+    "data": {
+      "alarmId": id.toString(),
+      "type": "insert",
+      "hour": hour.toString(),
+      "minute": minute.toString(),
+      "title": title
+    },
+    "priority": "high"
+  }
+  axios.post('https://fcm.googleapis.com/fcm/send', json, config)
+    .then(res => {
+      console.log(`statusCode: ${res.statusCode}`)
+      //console.log(res)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+
+  // add to firestore
+  admin.firestore().collection("alarms").doc(id.toString())
+    .withConverter(Converter)
+    .set(new Alarm(id, hour, minute, title, true));
+
+  res.redirect('/Home.html');
 });
 
 module.exports = router

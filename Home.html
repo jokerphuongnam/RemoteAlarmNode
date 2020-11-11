@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="assets/css/form.css" />
 <link rel="stylesheet" href="assets/css/slide.css" />
 <link rel="stylesheet" href="assets/css/columns.css" />
+<link rel="stylesheet" href="assets/css/onoffswitch.css" />
 </head>
 <style>
 .datebox-active {
@@ -113,20 +114,20 @@
 						<h3>Hiển thị giờ báo thức ở đây</h3>
 						<p>Thêm title</p>
 						<p>
-							<span class="datebox-active"
-								style="font-weight: bold; font-size: 12px; line-height: 30px; width: 30px; border: 2px white solid; display: inline-block; text-align: center; border-radius: 4px;">Mon</span>
-							<span
-								style="font-weight: bold; font-size: 12px; line-height: 30px; width: 30px; border: 2px white solid; display: inline-block; text-align: center; border-radius: 4px;">Tue</span>
-							<span class="datebox-active"
-								style="font-weight: bold; font-size: 12px; line-height: 30px; width: 30px; border: 2px white solid; display: inline-block; text-align: center; border-radius: 4px;">Wed</span>
-							<span
-								style="font-weight: bold; font-size: 12px; line-height: 30px; width: 30px; border: 2px white solid; display: inline-block; text-align: center; border-radius: 4px;">Thu</span>
-							<span
-								style="font-weight: bold; font-size: 12px; line-height: 30px; width: 30px; border: 2px white solid; display: inline-block; text-align: center; border-radius: 4px;">Fri</span>
-							<span
-								style="font-weight: bold; font-size: 12px; line-height: 30px; width: 30px; border: 2px white solid; display: inline-block; text-align: center; border-radius: 4px;">Sat</span>
-							<span
-								style="font-weight: bold; font-size: 12px; line-height: 30px; width: 30px; border: 2px white solid; display: inline-block; text-align: center; border-radius: 4px;">Sun</span>
+							<span id="alarmColor1_mo" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080; text-align: center;border-radius: 4px;">Mon</span>
+							<span id="alarmColor1_tu" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Tue</span>
+							<span id="alarmColor1_we" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Wed</span>
+							<span id="alarmColor1_th" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Thu</span>
+							<span id="alarmColor1_fr" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Fri</span>
+							<span id="alarmColor1_sa" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Sat</span>
+							<span id="alarmColor1_su" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Sun</span>
 						</p>
 						<p>Nút tích Repeat</p>
 						<button class="btn success" style="font-size: 20px"

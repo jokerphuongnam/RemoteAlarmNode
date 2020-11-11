@@ -19,45 +19,159 @@ db.collection("alarms").onSnapshot(function (querySnapshot) {
         <div class="inner">
             <h3>${doc.data().hour} : ${doc.data().minute}</h3>
             <p>${doc.data().title}</p>
+
             <p>
-                <span class="${doc.data().monday ?"datebox-active" :""}"
-                    style="font-weight: bold;font-size: 12px;line-height: 30px ; width: 30px; border: 2px white solid;display: inline-block;text-align: center;border-radius: 4px;">Mon</span>
-                <span class="${doc.data().tuesday ?"datebox-active" :""}"
-                    style="font-weight: bold;font-size: 12px;line-height: 30px ; width: 30px; border: 2px white solid;display: inline-block;text-align: center;border-radius: 4px;">Tue</span>
-                <span class="${doc.data().wednesday ?"datebox-active" :""}"
-                    style="font-weight: bold;font-size: 12px;line-height: 30px ; width: 30px; border: 2px white solid;display: inline-block;text-align: center;border-radius: 4px;">Wed</span>
-                <span class="${doc.data().thursday ?"datebox-active" :""}"
-                    style="font-weight: bold;font-size: 12px;line-height: 30px ; width: 30px; border: 2px white solid;display: inline-block;text-align: center;border-radius: 4px;">Thu</span>
-                <span class="${doc.data().friday ?"datebox-active" :""}"
-                    style="font-weight: bold;font-size: 12px;line-height: 30px ; width: 30px; border: 2px white solid;display: inline-block;text-align: center;border-radius: 4px;">Fri</span>
-                <span class="${doc.data().saturday ?"datebox-active" :""}"
-                    style="font-weight: bold;font-size: 12px;line-height: 30px ; width: 30px; border: 2px white solid;display: inline-block;text-align: center;border-radius: 4px;">Sat</span>
-                <span class="${doc.data().sunday ?"datebox-active" :""}"
-                    style="font-weight: bold;font-size: 12px;line-height: 30px ; width: 30px; border: 2px white solid;display: inline-block;text-align: center;border-radius: 4px;">Sun</span>
+                <span id="${doc.data().alarmId}_mo" onclick="dateboxColor(id)"
+                style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  ${doc.data().monday ? "#008000" : "#808080"}; text-align: center;border-radius: 4px;">Mon</span>
+                <span id="${doc.data().alarmId}_tu" onclick="dateboxColor(id)"
+                style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  ${doc.data().tuesday ? "#008000" : "#808080"};text-align: center;border-radius: 4px;">Tue</span>
+                <span id="${doc.data().alarmId}_we" onclick="dateboxColor(id)"
+                style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  ${doc.data().wednesday ? "#008000" : "#808080"};text-align: center;border-radius: 4px;">Wed</span>
+                <span id="${doc.data().alarmId}_th" onclick="dateboxColor(id)"
+                style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  ${doc.data().thursday ? "#008000" : "#808080"};text-align: center;border-radius: 4px;">Thu</span>
+                <span id="${doc.data().alarmId}_fr" onclick="dateboxColor(id)"
+                style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  ${doc.data().friday ? "#008000" : "#808080"};text-align: center;border-radius: 4px;">Fri</span>
+                <span id="${doc.data().alarmId}_sa" onclick="dateboxColor(id)"
+                style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  ${doc.data().saturday ? "#008000" : "#808080"};text-align: center;border-radius: 4px;">Sat</span>
+                <span id="${doc.data().alarmId}_su" onclick="dateboxColor(id)"
+                style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  ${doc.data().sunday ? "#008000" : "#808080"};text-align: center;border-radius: 4px;">Sun</span>
             </p>
-            <p>Nút tích Repeat</p>
+            
+
+            <div style="text-align: center;">
+            <div  class="onoffswitch">
+            Repeat
+            <br>
+            <div>
+            <input  id="#checker" type="checkbox" ${doc.data().recurring ? "checked" : ""}  name="onoffswitch" class="onoffswitch-checkbox" onclick="ChuMiNga(${doc.data().alarmId})" >
+            <label class="onoffswitch-label" for="#checker">
+            <div class="onoffswitch-inner">
+                <div class="onoffswitch-active">
+                    <div class="onoffswitch-switch">ON</div>
+                </div>
+                <div class="onoffswitch-inactive">
+                    <div class="onoffswitch-switch">OFF</div>
+                </div>
+            </div>
+            </label>
+    </div>
+    </div>      
+       
+
             <button class="btn success" style="font-size: 20px" onclick="openUpdateForm(${doc.data().alarmId})">Set Time</button>
             <div style="line-height:50%;">
                 <br>
             </div>
-            <button class="btn danger" style="font-size: 20px" onclick="location.href='cancel/${doc.data().alarmId}.htm'">Remove</button>
+            <button class="btn danger" style="font-size: 20px" onclick="location.href='cancel/${doc.data().alarmId}'">Remove</button>
         </div>
     </div>`
     });
-  
+
     list.innerHTML = alarms;
 });
+
+
+
+function ChuMiNga(id) {
+    var checkBox = document.getElementById('#checker');
+   // let docId = id.substring(1)
+   
+    // su dung flag vi async function
+    let flag = false;
+    if (checkBox.checked == true) {
+      //  checkBox.checked = false;
+        flag = true
+
+    } else {
+   //     checkBox.checked = true;
+  
+
+    }
+   
+    var ref = db.collection("alarms").doc(id.toString());
+    ref.update({
+            recurring: flag
+        }).then(function () {
+            console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+
+            console.error("Error updating document: ", error);
+        });
+}
+
+function dateboxColor(id) {
+    var flag = false;
+    if (document.getElementById(id).style.color == 'rgb(0, 128, 0)') {
+        document.getElementById(id).style.color = 'rgb(128, 128, 128)';
+    } else {
+        flag = true
+        document.getElementById(id).style.color = 'rgb(0, 128, 0)';
+    }
+    let index = id.indexOf("_")
+    let docId = id.substring(0,index)
+    let tmp = id.substring(index+1, index+3);
+
+    var ref = db.collection("alarms").doc(String(docId));
+
+  
+
+    switch (tmp) {
+        case 'mo':
+            ref.update({
+                monday: flag
+            })
+            break;
+        case 'tu':
+            ref.update({
+                tuesday: flag
+            })
+            break;
+        case 'we':
+            ref.update({
+                wednesday: flag
+            })
+            break;
+        case 'th':
+            ref.update({
+                thursday: flag
+            })
+            break;
+        case 'fr':
+            ref.update({
+                friday: flag
+            })
+            break;
+        case 'sa':
+            ref.update({
+                saturday: flag
+            })
+            break;
+        case 'su':
+            ref.update({
+                sunday: flag
+            })
+            break;
+        default:
+        // code block
+    }
+
+    
+        
+}
+
+
 
 
 function changeColor(id) {
     var flag = false;
     if (document.getElementById(id).style.color == 'rgb(0, 128, 0)') {
-       // document.getElementById(id).style.color = 'rgb(128, 128, 128)';// tat
+        // document.getElementById(id).style.color = 'rgb(128, 128, 128)';// tat
         flag = false
         console.log("tat")
     } else {
 
-      //  document.getElementById(id).style.color = 'rgb(0, 128, 0)';// bat
+        //  document.getElementById(id).style.color = 'rgb(0, 128, 0)';// bat
         flag = true
         console.log("bat")
     }
@@ -66,7 +180,7 @@ function changeColor(id) {
     var ref = db.collection("alarms").doc(String(id));
 
 
-     ref.update({
+    ref.update({
         started: flag
     })
         .then(function () {
