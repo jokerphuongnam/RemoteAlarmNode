@@ -1,0 +1,23 @@
+Project Remote alarm
+
+File code chính quan trọng:
+    Main.js : File chính khởi chạy web app (nodejs / express js)
+    router.js : class chứa các phương thức điều hướng route ( như request mapping) , kèm xử lý firebase phía server
+    Alarm.js : class đối tượng chính của app (đối tượng đặt báo thức)
+    và các file frontend (js,css,html) trong đó có file xử lý firebase phía client quan trọng là firebaseUtil.js
+
+
+File code thư viện (k đụng vào):
+    privateKey.json : file chứa thông tin kết nối server firebase với nodejs 
+    package.json : file khai báo các thư viện bên thứ 3 (npm) (các dependenciesdependencies)
+    package-lock.json : file này dc tự sinh lúc npm tải các thư viện khai báo ở file trên (k đụng)
+
+Thư mục node_modules: chứa các file thư viện dc tải về bằng npm (khai báo ở package.json)
+Các file tài nguyên còn lại: image, icon, font,..
+
+Công nghệ sử dụng: 
+nodejs, expressjs, npm (node package manager) , admin sdk from firebase, firebase cloud messaging, firestore
+
+Host: Heroku
+Database: Firebase Firestore (noSQL style)
+
