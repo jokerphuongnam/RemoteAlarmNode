@@ -38,13 +38,12 @@ db.collection("alarms").onSnapshot(function (querySnapshot) {
             </p>
             
 
-            <div style="text-align: center;">
             <div  class="onoffswitch">
             Repeat
             <br>
             <div>
-            <input  id="#checker" type="checkbox" ${doc.data().recurring ? "checked" : ""}  name="onoffswitch" class="onoffswitch-checkbox" onclick="ChuMiNga(${doc.data().alarmId})" >
-            <label class="onoffswitch-label" for="#checker">
+            <input  id="#${doc.data().alarmId}" type="checkbox" ${doc.data().recurring ? "checked" : ""}  name="onoffswitch" class="onoffswitch-checkbox" onclick="ChuMiNga(${doc.data().alarmId})" >
+            <label class="onoffswitch-label" for="#${doc.data().alarmId}">
             <div class="onoffswitch-inner">
                 <div class="onoffswitch-active">
                     <div class="onoffswitch-switch">ON</div>
@@ -54,8 +53,8 @@ db.collection("alarms").onSnapshot(function (querySnapshot) {
                 </div>
             </div>
             </label>
-    </div>
-    </div>      
+            </div>
+          </div>   
        
 
             <button class="btn success" style="font-size: 20px" onclick="openUpdateForm(${doc.data().alarmId})">Set Time</button>
@@ -73,8 +72,8 @@ db.collection("alarms").onSnapshot(function (querySnapshot) {
 
 
 function ChuMiNga(id) {
-    var checkBox = document.getElementById('#checker');
-   // let docId = id.substring(1)
+    var checkBox = document.getElementById('#'+id);
+  //  let docId = id.substring(1)
    
     // su dung flag vi async function
     let flag = false;
@@ -87,7 +86,7 @@ function ChuMiNga(id) {
   
 
     }
-   
+  // console.log(docId)
     var ref = db.collection("alarms").doc(id.toString());
     ref.update({
             recurring: flag

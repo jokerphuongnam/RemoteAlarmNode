@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="assets/css/slide.css" />
 <link rel="stylesheet" href="assets/css/columns.css" />
 <link rel="stylesheet" href="assets/css/onoffswitch.css" />
+<link rel="shortcut icon" type="image/png" href="cloud-clock.png"/>
 </head>
 <style>
 .datebox-active {
@@ -148,7 +149,7 @@
 	<!-- Popup cái set bao thức -->
 	<div class="modal" id="alarmId">
 		<div class="form-popup modal-content">
-			<form action="new.html" method="POST">
+			<form action="new.html" class="form-container" method="POST">
 				<div>
 					<label style="font-size: 25px;">Chọn giờ:</label> <input
 						name="time" style="font-size: 25px;" type="time" required>
@@ -182,16 +183,16 @@
 				</div>
 				<br> <br>
 				<button class="btn success">Set</button>
-
+				<button class="btn danger" onclick="closeAlarmForm()">Cancel</button>
 			</form>
-			<button class="btn danger" onclick="closeAlarmForm()">Cancel</button>
+			
 		</div>
 	</div>
 
 	<!-- Popup cái update bao thức -->
 	<div class="modal" id="update">
 		<div class="form-popup modal-content">
-			<form action="update.html" method="post">
+			<form action="update.html" method="post" class="form-container">
 
 				<div>
 					<label style="font-size: 25px;">ID:</label> <br> <input id ="alarmMid"
@@ -232,9 +233,9 @@
 				</div>
 				<br> <br>
 				<button class="btn success" type="submit">Set</button>
-
+				<button class="btn danger" onclick="closeUpdateForm()">Cancel</button>
 			</form>
-			<button class="btn danger" onclick="closeUpdateForm()">Cancel</button>
+			
 		</div>
 	</div>
 
@@ -347,3 +348,7 @@
 		}
 	</script>
 </html>
+
+
+
+	   
