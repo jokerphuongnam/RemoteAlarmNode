@@ -1,56 +1,79 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<title>Alarm App</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="assets/css/style.css" />
-<link rel="stylesheet" href="assets/css/form.css" />
-<link rel="stylesheet" href="assets/css/slide.css" />
-<link rel="stylesheet" href="assets/css/columns.css" />
-<link rel="stylesheet" href="assets/css/onoffswitch.css" />
-<link rel="shortcut icon" type="image/png" href="cloud-clock.png"/>
+	<title>Alarm App</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="assets/css/style.css" />
+	<link rel="stylesheet" href="assets/css/form.css" />
+	<link rel="stylesheet" href="assets/css/slide.css" />
+	<link rel="stylesheet" href="assets/css/columns.css" />
+	<link rel="stylesheet" href="assets/css/onoffswitch.css" />
+	<link rel="shortcut icon" type="image/png" href="cloud-clock.png" />
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="dist/bootstrap-clockpicker.min.css">
 </head>
 <style>
-.datebox-active {
-	background-color: #008000;
-}
+	.datebox-active {
+		background-color: #008000;
+	}
 
-.modal {
-	display: none;
-	/* Hidden by default */
-	position: fixed;
-	/* Stay in place */
-	z-index: 1;
-	/* Sit on top */
-	padding-top: 100px;
-	/* Location of the box */
-	left: 0;
-	top: 0;
-	width: 100%;
-	/* Full width */
-	height: 100%;
-	/* Full height */
-	overflow: auto;
-	/* Enable scroll if needed */
-	background-color: rgb(0, 0, 0);
-	/* Fallback color */
-	background-color: rgba(0, 0, 0, 0.8);
-	/* Black w/ opacity */
-}
+	.modal {
+		display: none;
+		/* Hidden by default */
+		position: fixed;
+		/* Stay in place */
+		z-index: 1;
+		/* Sit on top */
+		padding-top: 100px;
+		/* Location of the box */
+		left: 0;
+		top: 0;
+		width: 100%;
+		/* Full width */
+		height: 100%;
+		/* Full height */
+		overflow: auto;
+		/* Enable scroll if needed */
+		background-color: rgb(0, 0, 0);
+		/* Fallback color */
+		background-color: rgba(0, 0, 0, 0.8);
+		/* Black w/ opacity */
+	}
 
-/* Modal Content */
-.modal-content {
-	margin: auto;
-	width: 50%;
-}
+	/* Modal Content */
+	.modal-content {
+		margin: auto;
+		width: 50%;
+	}
+
+
+
+	body {
+		background: #202024;
+		color: white;
+	}
+
+	body.is-loading *,
+	body.is-loading *:before,
+	body.is-loading *:after {
+		-moz-animation: none !important;
+		-webkit-animation: none !important;
+		-ms-animation: none !important;
+		animation: none !important;
+		-moz-transition: none !important;
+		-webkit-transition: none !important;
+		-ms-transition: none !important;
+		transition: none !important;
+	}
 </style>
-<body>
+
+<body class="body">
 
 	<div class="header">
-		<a href="Home.html" class="logo"><img src="images/logo.png"
-			width="66.25" height="20"></a>
+		<a href="Home.html" class="logo"><img src="images/logo.png" width="66.25" height="20"></a>
 		<!-- Dẫn về Home-->
 		<div class="header-center">
 			<a class="active" href="Home.html">Home</a>
@@ -96,8 +119,7 @@
 
 			<!--Nút bấm tạo báo thức mới-->
 			<div class="centerbtn">
-				<Button class="btn info" style="font-size: 20px;"
-					onclick="openAlarmForm()">Create New</Button>
+				<Button class="btn info" style="font-size: 20px;" onclick="openAlarmForm()">Create New</Button>
 			</div>
 
 			<br> <br>
@@ -131,13 +153,11 @@
 								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Sun</span>
 						</p>
 						<p>Nút tích Repeat</p>
-						<button class="btn success" style="font-size: 20px"
-							onclick="openAlarmForm()">Set Time</button>
+						<button class="btn success" style="font-size: 20px" onclick="openAlarmForm()">Set Time</button>
 						<div style="line-height: 50%;">
 							<br>
 						</div>
-						<button class="btn danger" style="font-size: 20px"
-							onclick="openAlarmForm()">Remove</button>
+						<button class="btn danger" style="font-size: 20px" onclick="openAlarmForm()">Remove</button>
 					</div>
 				</div>
 
@@ -146,33 +166,33 @@
 		</div>
 	</div>
 
-	<!-- Popup cái set bao thức -->
+	<!-- Popup cái set bao thức
 	<div class="modal" id="alarmId">
 		<div class="form-popup modal-content">
 			<form action="new.html" class="form-container" method="POST">
 				<div>
-					<label style="font-size: 25px;">Chọn giờ:</label> <input
-						name="time" style="font-size: 25px;" type="time" required>
+					<label style="font-size: 25px;">Chọn giờ:</label> <input name="time" style="font-size: 25px;"
+						type="time" required>
 				</div>
 
 				<br>
 
 				<div>
-					<label style="font-size: 25px;">Nhập Tiêu Đề:</label> <br> <input
-						type="text" name="title" placeholder="Title">
+					<label style="font-size: 25px;">Nhập Tiêu Đề:</label> <br> <input type="text" name="title"
+						placeholder="Title">
 				</div>
 
 				<br> <label>Chọn ngày báo thức</label> <br>
 
 				<div>
 					<label">Mon <input type="checkbox" checked="checked">
-					</label> <label>- Tues <input type="checkbox" checked="checked">
-					</label> <label>- Wed <input type="checkbox" checked="checked">
-					</label> <label>- Thus <input type="checkbox" checked="checked">
-					</label> <label>- Fri <input type="checkbox" checked="checked">
-					</label> <label>- Sat <input type="checkbox" checked="checked">
-					</label> <label>- Sun <input type="checkbox" checked="checked">
-					</label>
+						</label> <label>- Tues <input type="checkbox" checked="checked">
+						</label> <label>- Wed <input type="checkbox" checked="checked">
+						</label> <label>- Thus <input type="checkbox" checked="checked">
+						</label> <label>- Fri <input type="checkbox" checked="checked">
+						</label> <label>- Sat <input type="checkbox" checked="checked">
+						</label> <label>- Sun <input type="checkbox" checked="checked">
+						</label>
 				</div>
 
 				<br>
@@ -185,43 +205,138 @@
 				<button class="btn success">Set</button>
 				<button class="btn danger" onclick="closeAlarmForm()">Cancel</button>
 			</form>
-			
+
 		</div>
+	</div> -->
+
+	<div class="form-popup" id="alarmId">
+		<form action="new.html" class="form-container" method="POST">
+
+			<!-- Bootstrap clock-->
+			<div>
+				<div class="input-group clockpicker" style="width: 150px; margin: auto; color: black;"
+					data-placement="left" data-align="top" data-autoclose="true">
+					<input type="text" name="time" required>
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-time"></span>
+					</span>
+				</div>
+			</div>
+			<!-- Bootstrap clock-->
+
+			<br>
+
+			<!-- Tiêu đề-->
+			<div>
+				<label style="font-size: 25px;">Nhập Tiêu Đề:</label>
+				<br>
+				<input type="text" name="title" style="font-size: 25px; color: black;" placeholder="Title" required>
+			</div>
+			<!-- Tiêu đề-->
+
+
+			<br>
+
+			<!-- 7 Checkbox từ thứ 2 đến chủ nhật-->
+			<label>Chọn ngày báo thức</label>
+			<br>
+			<div class="row2">
+				<div class="body2 column2" style="color: black;">
+					<input class="tgl tgl-skewed" id="alarmID_mo" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Mon" data-tg-on="Mon" for="alarmID_mo"></label>
+					<br>
+					<input class="tgl tgl-skewed" id="alarmID_th" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Thu" data-tg-on="Thu" for="alarmID_th"></label>
+				</div>
+
+				<div class="body2 column2">
+					<input class="tgl tgl-skewed" id="alarmID_tu" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Tue" data-tg-on="Tue" for="alarmID_tu"></label>
+					<br>
+					<input class="tgl tgl-skewed" id="alarmID_fr" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Fri" data-tg-on="Fri" for="alarmID_fr"></label>
+					<br>
+					<input class="tgl tgl-skewed" id="alarmID_su" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Sun" data-tg-on="Sun" for="alarmID_su"></label>
+				</div>
+
+				<div class="body2 column2">
+					<input class="tgl tgl-skewed" id="alarmID_we" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Wed" data-tg-on="Wed" for="alarmID_we"></label>
+					<br>
+					<input class="tgl tgl-skewed" id="alarmID_sa" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Sat" data-tg-on="Sat" for="alarmID_sa"></label>
+				</div>
+			</div>
+			<!-- 7 Checkbox từ thứ 2 đến chủ nhật-->
+
+			<br>
+
+			<!-- Checkbox Repeat-->
+			<div>
+				<div style="text-align: center;">
+					<div class="onoffswitch">
+						Repeat
+						<br>
+						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" "
+							id="alarmId_Repeat_Inpopupform">
+						<label class="onoffswitch-label" for="alarmId_Repeat_Inpopupform">
+							<div class="onoffswitch-inner">
+								<div class="onoffswitch-active">
+									<div class="onoffswitch-switch">ON</div>
+								</div>
+								<div class="onoffswitch-inactive">
+									<div class="onoffswitch-switch">OFF</div>
+								</div>
+							</div>
+						</label>
+					</div>
+				</div>
+			</div>
+			<!-- Checkbox Repeat-->
+
+
+			<br>
+			<br>
+
+			<!-- Nút End form-->
+			<button class="btn success ">Set</button>
+			<button class="btn danger " type="button" onclick="closeAlarmForm() ">Cancel</button>
+		</form>
 	</div>
 
 	<!-- Popup cái update bao thức -->
-	<div class="modal" id="update">
+	<!-- <div class="modal" id="update">
 		<div class="form-popup modal-content">
 			<form action="update.html" method="post" class="form-container">
 
 				<div>
-					<label style="font-size: 25px;">ID:</label> <br> <input id ="alarmMid"
-						type="text" name="aid">
+					<label style="font-size: 25px;">ID:</label> <br> <input id="alarmMid" type="text" name="aid">
 				</div>
 				<br>
 				<div>
-					<label style="font-size: 25px;">Chọn giờ:</label> <input
-						name="time" style="font-size: 25px;" type="time" required>
+					<label style="font-size: 25px;">Chọn giờ:</label> <input name="time" style="font-size: 25px;"
+						type="time" required>
 				</div>
 
 				<br>
 
 				<div>
-					<label style="font-size: 25px;">Nhập Tiêu Đề:</label> <br> <input
-						type="text" name="title" placeholder="Title">
+					<label style="font-size: 25px;">Nhập Tiêu Đề:</label> <br> <input type="text" name="title"
+						placeholder="Title">
 				</div>
 
 				<br> <label>Chọn ngày báo thức</label> <br>
 
 				<div>
 					<label">Mon <input type="checkbox" checked="checked">
-					</label> <label>- Tues <input type="checkbox" checked="checked">
-					</label> <label>- Wed <input type="checkbox" checked="checked">
-					</label> <label>- Thus <input type="checkbox" checked="checked">
-					</label> <label>- Fri <input type="checkbox" checked="checked">
-					</label> <label>- Sat <input type="checkbox" checked="checked">
-					</label> <label>- Sun <input type="checkbox" checked="checked">
-					</label>
+						</label> <label>- Tues <input type="checkbox" checked="checked">
+						</label> <label>- Wed <input type="checkbox" checked="checked">
+						</label> <label>- Thus <input type="checkbox" checked="checked">
+						</label> <label>- Fri <input type="checkbox" checked="checked">
+						</label> <label>- Sat <input type="checkbox" checked="checked">
+						</label> <label>- Sun <input type="checkbox" checked="checked">
+						</label>
 				</div>
 
 				<br>
@@ -235,8 +350,109 @@
 				<button class="btn success" type="submit">Set</button>
 				<button class="btn danger" onclick="closeUpdateForm()">Cancel</button>
 			</form>
-			
+
 		</div>
+	</div> -->
+
+
+	<div class="form-popup" id="update">
+		<form action="update.html" class="form-container" method="POST">
+
+			<div>
+				<label style="font-size: 25px;">ID:</label> <br> <input id="alarmMid" type="text" name="aid" readonly="true">
+			</div>
+			<br>
+			<!-- Bootstrap clock-->
+			<div>
+				<div class="input-group clockpicker" style="width: 150px; margin: auto; color: black;"
+					data-placement="left" data-align="top" data-autoclose="true">
+					<input type="text" name="time" required>
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-time"></span>
+					</span>
+				</div>
+			</div>
+			<!-- Bootstrap clock-->
+
+			<br>
+
+			<!-- Tiêu đề-->
+			<div>
+				<label style="font-size: 25px;">Nhập Tiêu Đề:</label>
+				<br>
+				<input type="text" name="title" style="font-size: 25px; color: black;" placeholder="Title" required>
+			</div>
+			<!-- Tiêu đề-->
+
+
+			<br>
+
+			<!-- 7 Checkbox từ thứ 2 đến chủ nhật-->
+			<label>Chọn ngày báo thức</label>
+			<br>
+			<div class="row2">
+				<div class="body2 column2" style="color: black;">
+					<input class="tgl tgl-skewed" id="alarmID_mo1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Mon" data-tg-on="Mon" for="alarmID_mo"></label>
+					<br>
+					<input class="tgl tgl-skewed" id="alarmID_th1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Thu" data-tg-on="Thu" for="alarmID_th"></label>
+				</div>
+
+				<div class="body2 column2">
+					<input class="tgl tgl-skewed" id="alarmID_tu1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Tue" data-tg-on="Tue" for="alarmID_tu"></label>
+					<br>
+					<input class="tgl tgl-skewed" id="alarmID_fr1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Fri" data-tg-on="Fri" for="alarmID_fr"></label>
+					<br>
+					<input class="tgl tgl-skewed" id="alarmID_su1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Sun" data-tg-on="Sun" for="alarmID_su"></label>
+				</div>
+
+				<div class="body2 column2">
+					<input class="tgl tgl-skewed" id="alarmID_we1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Wed" data-tg-on="Wed" for="alarmID_we"></label>
+					<br>
+					<input class="tgl tgl-skewed" id="alarmID_sa1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<label class="tgl-btn" data-tg-off="Sat" data-tg-on="Sat" for="alarmID_sa"></label>
+				</div>
+			</div>
+			<!-- 7 Checkbox từ thứ 2 đến chủ nhật-->
+
+			<br>
+
+			<!-- Checkbox Repeat-->
+			<div>
+				<div style="text-align: center;">
+					<div class="onoffswitch">
+						Repeat
+						<br>
+						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" "
+							id="alarmId_Repeat_Inpopupform1">
+						<label class="onoffswitch-label" for="alarmId_Repeat_Inpopupform1">
+							<div class="onoffswitch-inner">
+								<div class="onoffswitch-active">
+									<div class="onoffswitch-switch">ON</div>
+								</div>
+								<div class="onoffswitch-inactive">
+									<div class="onoffswitch-switch">OFF</div>
+								</div>
+							</div>
+						</label>
+					</div>
+				</div>
+			</div>
+			<!-- Checkbox Repeat-->
+
+
+			<br>
+			<br>
+
+			<!-- Nút End form-->
+			<button class="btn success ">Set</button>
+			<button class="btn danger " type="button" onclick="closeUpdateForm() ">Cancel</button>
+		</form>
 	</div>
 
 	<hr>
@@ -247,8 +463,7 @@
 				<div class="column">
 					<h2>Download Our App</h2>
 					<img src="images/AppleStore.svg" alt="" width="170" height="56">
-					<br> <br> <img src="images/GooglePlay.png" alt=""
-						width="167" height="50">
+					<br> <br> <img src="images/GooglePlay.png" alt="" width="167" height="50">
 				</div>
 				<div class="column">
 					<h2>Resources</h2>
@@ -282,26 +497,47 @@
 	<script src="assets/js/skel.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="dist/bootstrap-clockpicker.min.js"></script>
+	<script type="text/javascript">
+		$('.clockpicker').clockpicker()
+			.find('input').change(function () {
+				console.log(this.value);
+				//alert(this.value);
+			});
+	</script>
+
+	<script>
+		function dateboxColorForm(id) {
+			checkBox = document.getElementById(id);
+			
+			if (checkBox.checked == true) {
+				console.log('checked')
+			} else {
+				console.log('unchecked')
+			}
+		}
+	</script>
 
 	<!-- The core Firebase JS SDK is always required and must be listed first -->
 	<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
 
 	<!-- TODO: Add SDKs for Firebase products that you want to use
 		 https://firebase.google.com/docs/web/setup#available-libraries -->
-	<script
-		src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
 
 
 	<script>
 		// Your web app's Firebase configuration
 		var firebaseConfig = {
-			apiKey : "AIzaSyBucL9Q85YASVNA8-M4UMBvZK2tYV14zWo",
-			authDomain : "remotealarmclock-2f98a.firebaseapp.com",
-			databaseURL : "https://remotealarmclock-2f98a.firebaseio.com",
-			projectId : "remotealarmclock-2f98a",
-			storageBucket : "remotealarmclock-2f98a.appspot.com",
-			messagingSenderId : "570922046860",
-			appId : "1:570922046860:web:3b1fa8f98bb8935adcf2a9"
+			apiKey: "AIzaSyBucL9Q85YASVNA8-M4UMBvZK2tYV14zWo",
+			authDomain: "remotealarmclock-2f98a.firebaseapp.com",
+			databaseURL: "https://remotealarmclock-2f98a.firebaseio.com",
+			projectId: "remotealarmclock-2f98a",
+			storageBucket: "remotealarmclock-2f98a.appspot.com",
+			messagingSenderId: "570922046860",
+			appId: "1:570922046860:web:3b1fa8f98bb8935adcf2a9"
 		};
 		// Initialize Firebase
 		firebase.initializeApp(firebaseConfig);
@@ -347,8 +583,5 @@
 
 		}
 	</script>
+
 </html>
-
-
-
-	   

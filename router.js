@@ -152,7 +152,7 @@ router.post('/new.html', function (req, res) {
   console.log(id)
   let data = req.body
   var time = data.time.toString()
-  console.log(data.title.hour)
+  console.log(time)
   let hour = parseInt(time.substring(0, 2))
   let minute = parseInt(time.substring(3, 5))
   let title = data.title
