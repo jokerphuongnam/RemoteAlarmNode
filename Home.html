@@ -216,7 +216,7 @@
 			<div>
 				<div class="input-group clockpicker" style="width: 150px; margin: auto; color: black;"
 					data-placement="left" data-align="top" data-autoclose="true">
-					<input class="form-control" style="font-size: 30px; text-align: center;"  type="text123" name="time" required>
+					<input class="form-control" readonly="true" style="font-size: 30px; text-align: center;"  type="text123" name="time" required>
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-time"></span>
 					</span>
@@ -242,29 +242,29 @@
 			<br>
 			<div class="row2">
 				<div class="body2 column2" style="color: black;">
-					<input class="tgl tgl-skewed" id="alarmID_mo" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="monday_cb" class="tgl tgl-skewed" id="alarmID_mo" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Mon" data-tg-on="Mon" for="alarmID_mo"></label>
 					<br>
-					<input class="tgl tgl-skewed" id="alarmID_th" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="thursday_cb" class="tgl tgl-skewed" id="alarmID_th" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Thu" data-tg-on="Thu" for="alarmID_th"></label>
 				</div>
 
 				<div class="body2 column2">
-					<input class="tgl tgl-skewed" id="alarmID_tu" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="tuesday_cb" class="tgl tgl-skewed" id="alarmID_tu" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Tue" data-tg-on="Tue" for="alarmID_tu"></label>
 					<br>
-					<input class="tgl tgl-skewed" id="alarmID_fr" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="friday_cb" class="tgl tgl-skewed" id="alarmID_fr" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Fri" data-tg-on="Fri" for="alarmID_fr"></label>
 					<br>
-					<input class="tgl tgl-skewed" id="alarmID_su" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="sunday_cb" class="tgl tgl-skewed" id="alarmID_su" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Sun" data-tg-on="Sun" for="alarmID_su"></label>
 				</div>
 
 				<div class="body2 column2">
-					<input class="tgl tgl-skewed" id="alarmID_we" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="wednesday_cb" class="tgl tgl-skewed" id="alarmID_we" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Wed" data-tg-on="Wed" for="alarmID_we"></label>
 					<br>
-					<input class="tgl tgl-skewed" id="alarmID_sa" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="saturday_cb" class="tgl tgl-skewed" id="alarmID_sa" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Sat" data-tg-on="Sat" for="alarmID_sa"></label>
 				</div>
 			</div>
@@ -366,7 +366,7 @@
 			<div>
 				<div class="input-group clockpicker" style="width: 150px; margin: auto; color: black;"
 					data-placement="left" data-align="top" data-autoclose="true">
-					<input style="font-size: 30px; text-align: center;" class="form-control" type="text123" name="time" required>
+					<input id="updateTime" readonly="true" style="font-size: 30px; text-align: center;" class="form-control" type="text123" name="time" required>
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-time"></span>
 					</span>
@@ -392,29 +392,29 @@
 			<br>
 			<div class="row2">
 				<div class="body2 column2" style="color: black;">
-					<input class="tgl tgl-skewed" id="alarmID_mo1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="monday_cb" class="tgl tgl-skewed" id="alarmID_mo1" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Mon" data-tg-on="Mon" for="alarmID_mo1"></label>
 					<br>
-					<input class="tgl tgl-skewed" id="alarmID_th1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="thursday_cb" class="tgl tgl-skewed" id="alarmID_th1" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Thu" data-tg-on="Thu" for="alarmID_th1"></label>
 				</div>
 
 				<div class="body2 column2">
-					<input class="tgl tgl-skewed" id="alarmID_tu1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="tuesday_cb" class="tgl tgl-skewed" id="alarmID_tu1" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Tue" data-tg-on="Tue" for="alarmID_tu1"></label>
 					<br>
-					<input class="tgl tgl-skewed" id="alarmID_fr1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="friday_cb" class="tgl tgl-skewed" id="alarmID_fr1" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Fri" data-tg-on="Fri" for="alarmID_fr1"></label>
 					<br>
-					<input class="tgl tgl-skewed" id="alarmID_su1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="sunday_cb" class="tgl tgl-skewed" id="alarmID_su1" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Sun" data-tg-on="Sun" for="alarmID_su1"></label>
 				</div>
 
 				<div class="body2 column2">
-					<input class="tgl tgl-skewed" id="alarmID_we1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="wednesday_cb" class="tgl tgl-skewed" id="alarmID_we1" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Wed" data-tg-on="Wed" for="alarmID_we1"></label>
 					<br>
-					<input class="tgl tgl-skewed" id="alarmID_sa1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="saturday_cb" class="tgl tgl-skewed" id="alarmID_sa1" type="checkbox" onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Sat" data-tg-on="Sat" for="alarmID_sa1"></label>
 				</div>
 			</div>

@@ -78,7 +78,20 @@ router.post('/update.html', function (req, res) {
   let hour = parseInt(time.substring(0, 2)) // cat chuoi lay gio
   let minute = parseInt(time.substring(3, 5))
   let title = data.title // // name cua input la title <input name="title" >
+  let recurring = (data.onoffswitch == undefined ? false: true)
+  let monday = (data.monday_cb == undefined ? false: true)
+  let tuesday = (data.tuesday_cb == undefined ? false: true)
+  let wednesday = (data.wednesday_cb == undefined ? false: true)
+  let thursday = (data.thursday_cb == undefined ? false: true)
+  let friday = (data.friday_cb == undefined ? false: true)
+  let saturday = (data.saturday_cb == undefined ? false: true)
+  let sunday = (data.sunday_cb == undefined ? false: true)
+  if (data.monday_cb == undefined) {
+console.log('thu 2 false')
 
+  } else {
+    console.log('thu 2 true')
+  }
   // khoi tao data gui thong bao den mobile
   let id = data.aid
   let json = {
@@ -110,7 +123,15 @@ router.post('/update.html', function (req, res) {
     hour: hour,
     minute: minute,
     started: true,
-    title: title
+    title: title,
+    monday: monday,
+    tuesday: tuesday,
+    wednesday: wednesday,
+    thursday: thursday,
+    friday: friday,
+    saturday: saturday,
+    sunday: sunday,
+    recurring: recurring
   });
 
   // dieu huong ve home 
@@ -152,7 +173,35 @@ router.post('/new.html', function (req, res) {
   console.log(id)
   let data = req.body
   var time = data.time.toString()
-  console.log(time)
+
+  // chuan bi cac checkbox
+  // recurring
+ // console.log('checkbox test' + data.onoffswitch)
+  // undefined thi false  , else thi true
+  if (data.monday_cb == undefined) {
+    console.log('undefined ----')
+  }
+  let recurring = (data.onoffswitch == undefined ? false: true)
+  let monday = (data.monday_cb == undefined ? false: true)
+  let tuesday = (data.tuesday_cb == undefined ? false: true)
+  let wednesday = (data.wednesday_cb == undefined ? false: true)
+  let thursday = (data.thursday_cb == undefined ? false: true)
+  let friday = (data.friday_cb == undefined ? false: true)
+  let saturday = (data.saturday_cb == undefined ? false: true)
+  let sunday = (data.sunday_cb == undefined ? false: true)
+  // console.log(data.monday_cb)
+  // console.log(data.tuesday_cb)
+  // console.log(data.wednesday_cb)
+  // console.log(data.thursday_cb)
+  // console.log(data.friday_cb)
+  // console.log(data.saturday_cb)
+  // console.log(data.sunday_cb)
+
+  // khong can gui  thong bao ve user nhung checkbox
+
+  // chi can gui len firestore cho demo
+
+
   let hour = parseInt(time.substring(0, 2))
   let minute = parseInt(time.substring(3, 5))
   let title = data.title
@@ -179,7 +228,7 @@ router.post('/new.html', function (req, res) {
   // cap nhat firestore
   admin.firestore().collection("alarms").doc(id.toString())
     .withConverter(Converter)
-    .set(new Alarm(id, hour, minute, title, true));
+    .set(new Alarm(id, hour, minute, title, true,monday,tuesday,wednesday,thursday,friday,saturday,sunday,recurring));
 
   // dieu huong ve home
   res.redirect('/Home.html');

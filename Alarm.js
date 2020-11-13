@@ -1,19 +1,19 @@
  class Alarm {
-    constructor (alarmId, hour, minute, title, started) {
+    constructor (alarmId, hour, minute, title, started, monday, tuesday,wednesday,thursday,friday,saturday,sunday, recurring) {
         this.alarmId = alarmId;
         this.hour = hour;
         this.minute = minute;
         this.title = title;
         this.created = new Date().getMilliseconds();
         this.started = started;
-        this.recurring = false;
-        this.monday = false;
-        this.tuesday = false;
-        this.wednesday = false;
-        this.thursday = false;
-        this.friday = false;
-        this.saturday = false;
-        this.sunday = false;
+        this.recurring = recurring;
+        this.monday = monday;
+        this.tuesday = tuesday;
+        this.wednesday = wednesday;
+        this.thursday = thursday;
+        this.friday = friday;
+        this.saturday = saturday;
+        this.sunday = sunday;
     }
     toString() {
         return this.alarmId + ', ' + this.hour + ', ' + this.minute;

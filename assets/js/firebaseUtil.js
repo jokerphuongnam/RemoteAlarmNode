@@ -183,11 +183,24 @@ function dateboxColor(id) {
 function openUpdateForm(id) {
     $("#update").show()
     $("#alarmMid").val(id)
+    // nap data vao from tu firestore
     var ref = db.collection("alarms").doc(String(id));
 
     const doc = ref.get().then(function (doc) {
         if (doc.exists) {
-            $("#updateTitle").val(doc.data().title)
+            let data = doc.data()
+            $("#updateTitle").val(data.title)
+            $("#updateTime").val(data.hour +':' +data.minute)
+            // nap cac check box
+            $('#alarmID_mo1').prop('checked', data.monday)
+            $('#alarmID_sa1').prop('checked', data.saturday)
+            $('#alarmID_fr1').prop('checked', data.friday)
+            $('#alarmID_tu1').prop('checked', data.tuesday)
+            $('#alarmID_we1').prop('checked', data.wednesday)
+            $('#alarmID_th1').prop('checked', data.thursday)
+            $('#alarmID_su1').prop('checked', data.sunday)
+            $('#alarmId_Repeat_Inpopupform1').prop('checked', data.recurring)
+            
 
         } else {
             // doc.data() will be undefined in this case
