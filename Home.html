@@ -278,7 +278,7 @@
 					<div class="onoffswitch">
 						Repeat
 						<br>
-						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" "
+						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" 
 							id="alarmId_Repeat_Inpopupform">
 						<label class="onoffswitch-label" for="alarmId_Repeat_Inpopupform">
 							<div class="onoffswitch-inner">
@@ -380,7 +380,7 @@
 			<div>
 				<label style="font-size: 25px;">Nhập Tiêu Đề:</label>
 				<br>
-				<input type="text" name="title" style="font-size: 25px; color: black;" placeholder="Title" required>
+				<input id="updateTitle" type="text" name="title" style="font-size: 25px; color: black;" placeholder="Title" required>
 			</div>
 			<!-- Tiêu đề-->
 
@@ -393,29 +393,29 @@
 			<div class="row2">
 				<div class="body2 column2" style="color: black;">
 					<input class="tgl tgl-skewed" id="alarmID_mo1" type="checkbox" onclick="dateboxColorForm(id)" />
-					<label class="tgl-btn" data-tg-off="Mon" data-tg-on="Mon" for="alarmID_mo"></label>
+					<label class="tgl-btn" data-tg-off="Mon" data-tg-on="Mon" for="alarmID_mo1"></label>
 					<br>
 					<input class="tgl tgl-skewed" id="alarmID_th1" type="checkbox" onclick="dateboxColorForm(id)" />
-					<label class="tgl-btn" data-tg-off="Thu" data-tg-on="Thu" for="alarmID_th"></label>
+					<label class="tgl-btn" data-tg-off="Thu" data-tg-on="Thu" for="alarmID_th1"></label>
 				</div>
 
 				<div class="body2 column2">
 					<input class="tgl tgl-skewed" id="alarmID_tu1" type="checkbox" onclick="dateboxColorForm(id)" />
-					<label class="tgl-btn" data-tg-off="Tue" data-tg-on="Tue" for="alarmID_tu"></label>
+					<label class="tgl-btn" data-tg-off="Tue" data-tg-on="Tue" for="alarmID_tu1"></label>
 					<br>
 					<input class="tgl tgl-skewed" id="alarmID_fr1" type="checkbox" onclick="dateboxColorForm(id)" />
-					<label class="tgl-btn" data-tg-off="Fri" data-tg-on="Fri" for="alarmID_fr"></label>
+					<label class="tgl-btn" data-tg-off="Fri" data-tg-on="Fri" for="alarmID_fr1"></label>
 					<br>
 					<input class="tgl tgl-skewed" id="alarmID_su1" type="checkbox" onclick="dateboxColorForm(id)" />
-					<label class="tgl-btn" data-tg-off="Sun" data-tg-on="Sun" for="alarmID_su"></label>
+					<label class="tgl-btn" data-tg-off="Sun" data-tg-on="Sun" for="alarmID_su1"></label>
 				</div>
 
 				<div class="body2 column2">
 					<input class="tgl tgl-skewed" id="alarmID_we1" type="checkbox" onclick="dateboxColorForm(id)" />
-					<label class="tgl-btn" data-tg-off="Wed" data-tg-on="Wed" for="alarmID_we"></label>
+					<label class="tgl-btn" data-tg-off="Wed" data-tg-on="Wed" for="alarmID_we1"></label>
 					<br>
 					<input class="tgl tgl-skewed" id="alarmID_sa1" type="checkbox" onclick="dateboxColorForm(id)" />
-					<label class="tgl-btn" data-tg-off="Sat" data-tg-on="Sat" for="alarmID_sa"></label>
+					<label class="tgl-btn" data-tg-off="Sat" data-tg-on="Sat" for="alarmID_sa1"></label>
 				</div>
 			</div>
 			<!-- 7 Checkbox từ thứ 2 đến chủ nhật-->
@@ -491,6 +491,7 @@
 
 
 	<!-- Scripts -->
+
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
 	<script src="assets/js/jquery.poptrox.min.js"></script>
@@ -510,9 +511,9 @@
 
 	<script>
 		function dateboxColorForm(id) {
-			checkBox = document.getElementById(id);
+			checkBox = $('#' + id);
 			
-			if (checkBox.checked == true) {
+			if (checkBox.is(':checked')) {
 				console.log('checked')
 			} else {
 				console.log('unchecked')
@@ -527,21 +528,6 @@
 		 https://firebase.google.com/docs/web/setup#available-libraries -->
 	<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
 
-
-	<script>
-		// Your web app's Firebase configuration
-		var firebaseConfig = {
-			apiKey: "AIzaSyBucL9Q85YASVNA8-M4UMBvZK2tYV14zWo",
-			authDomain: "remotealarmclock-2f98a.firebaseapp.com",
-			databaseURL: "https://remotealarmclock-2f98a.firebaseio.com",
-			projectId: "remotealarmclock-2f98a",
-			storageBucket: "remotealarmclock-2f98a.appspot.com",
-			messagingSenderId: "570922046860",
-			appId: "1:570922046860:web:3b1fa8f98bb8935adcf2a9"
-		};
-		// Initialize Firebase
-		firebase.initializeApp(firebaseConfig);
-	</script>
 	<script src="assets/js/firebaseUtil.js"></script>
 	<script>
 		/////////////////Banner//////////////////
@@ -550,36 +536,31 @@
 
 		function showSlides() {
 			var i;
-			var slides = document.getElementsByClassName("mySlides");
+			var slides = $(".mySlides");
+			console.log('length la: ' + slides.length)
 			for (i = 0; i < slides.length; i++) {
 				slides[i].style.display = "none";
 			}
+			console.log('slide thu 2' + slides[1])
 			slideIndex++;
 			if (slideIndex > slides.length) {
 				slideIndex = 1
 			}
 			slides[slideIndex - 1].style.display = "block";
-			setTimeout(showSlides, 8000); // fade ảnh sau 10s
+			setTimeout(showSlides, 4000); // fade ảnh sau 10s
 		}
 
 		////////////////Form để Set time/////////////
 		function openAlarmForm(id) {
-			document.getElementById("alarmId").style.display = "block";
-
+			$("#alarmId").show()
 		}
 
 		function closeAlarmForm() {
-			document.getElementById("alarmId").style.display = "none";
-		}
-
-		function openUpdateForm(id) {
-			document.getElementById("update").style.display = "block";
-			document.getElementById("alarmMid").value = id;
-
+			$("#alarmId").hide()
 		}
 
 		function closeUpdateForm() {
-			document.getElementById("update").style.display = "none";
+			$("#update").hide()
 
 		}
 	</script>

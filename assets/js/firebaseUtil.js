@@ -1,4 +1,15 @@
-
+// Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyBucL9Q85YASVNA8-M4UMBvZK2tYV14zWo",
+    authDomain: "remotealarmclock-2f98a.firebaseapp.com",
+    databaseURL: "https://remotealarmclock-2f98a.firebaseio.com",
+    projectId: "remotealarmclock-2f98a",
+    storageBucket: "remotealarmclock-2f98a.appspot.com",
+    messagingSenderId: "570922046860",
+    appId: "1:570922046860:web:3b1fa8f98bb8935adcf2a9"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 var db = firebase.firestore();
 const list = document.querySelector('.thumbnails');
@@ -38,23 +49,30 @@ db.collection("alarms").onSnapshot(function (querySnapshot) {
             </p>
             
 
-            <div  class="onoffswitch">
-            Repeat
-            <br>
-            <div>
-            <input  id="#${doc.data().alarmId}" type="checkbox" ${doc.data().recurring ? "checked" : ""}  name="onoffswitch" class="onoffswitch-checkbox" onclick="ChuMiNga(${doc.data().alarmId})" >
-            <label class="onoffswitch-label" for="#${doc.data().alarmId}">
-            <div class="onoffswitch-inner">
-                <div class="onoffswitch-active">
-                    <div class="onoffswitch-switch">ON</div>
-                </div>
-                <div class="onoffswitch-inactive">
-                    <div class="onoffswitch-switch">OFF</div>
-                </div>
-            </div>
-            </label>
-            </div>
-          </div>   
+            <!-- Checkbox Repeat-->
+			<div>
+				<div style="text-align: center;">
+					<div class="onoffswitch">
+						Repeat
+						<br>
+						<input type="checkbox"  ${doc.data().recurring ? "checked" : ""} name="onoffswitch" class="onoffswitch-checkbox" 
+							id="s${doc.data().alarmId}" onclick="ChuMiNga(${doc.data().alarmId})">
+						<label class="onoffswitch-label" for="s${doc.data().alarmId}">
+							<div class="onoffswitch-inner">
+								<div class="onoffswitch-active">
+									<div class="onoffswitch-switch">ON</div>
+								</div>
+								<div class="onoffswitch-inactive">
+									<div class="onoffswitch-switch">OFF</div>
+								</div>
+							</div>
+						</label>
+					</div>
+				</div>
+			</div>
+			<!-- Checkbox Repeat-->
+
+      
        
 
             <button class="btn success" style="font-size: 20px" onclick="openUpdateForm(${doc.data().alarmId})">Set Time</button>
@@ -72,48 +90,48 @@ db.collection("alarms").onSnapshot(function (querySnapshot) {
 
 
 function ChuMiNga(id) {
-    var checkBox = document.getElementById('#'+id);
-  //  let docId = id.substring(1)
-   
-    // su dung flag vi async function
+    
+    var checkBox = $('#' + 's' + id);
+
     let flag = false;
-    if (checkBox.checked == true) {
-      //  checkBox.checked = false;
+    if (checkBox.is(':checked')) {
         flag = true
-
-    } else {
-   //     checkBox.checked = true;
-  
-
     }
-  // console.log(docId)
-    var ref = db.collection("alarms").doc(id.toString());
-    ref.update({
+    
+    setTimeout(() => {
+        
+        var ref = db.collection("alarms").doc(id.toString());
+        ref.update({
             recurring: flag
         }).then(function () {
             console.log("Document successfully updated!");
         })
-        .catch(function (error) {
+            .catch(function (error) {
+    
+                console.error("Error updating document: ", error);
+            });
 
-            console.error("Error updating document: ", error);
-        });
+}, 500);
+
+    
 }
 
 function dateboxColor(id) {
     var flag = false;
-    if (document.getElementById(id).style.color == 'rgb(0, 128, 0)') {
-        document.getElementById(id).style.color = 'rgb(128, 128, 128)';
+    if ($("#" + id).css('color') == 'rgb(0, 128, 0)') {
+        $("#" + id).css('color', 'rgb(128, 128, 128)')
     } else {
         flag = true
-        document.getElementById(id).style.color = 'rgb(0, 128, 0)';
+        $("#" + id).css('color', 'rgb(0, 128, 0)')
+
     }
     let index = id.indexOf("_")
-    let docId = id.substring(0,index)
-    let tmp = id.substring(index+1, index+3);
+    let docId = id.substring(0, index)
+    let tmp = id.substring(index + 1, index + 3);
 
     var ref = db.collection("alarms").doc(String(docId));
 
-  
+
 
     switch (tmp) {
         case 'mo':
@@ -155,22 +173,41 @@ function dateboxColor(id) {
         // code block
     }
 
-    
-        
+
+
 }
 
 
 
 
+function openUpdateForm(id) {
+    $("#update").show()
+    $("#alarmMid").val(id)
+    var ref = db.collection("alarms").doc(String(id));
+
+    const doc = ref.get().then(function (doc) {
+        if (doc.exists) {
+            $("#updateTitle").val(doc.data().title)
+
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function (error) {
+        console.log("Error getting document:", error);
+    });
+}
+
 function changeColor(id) {
     var flag = false;
-    if (document.getElementById(id).style.color == 'rgb(0, 128, 0)') {
-        // document.getElementById(id).style.color = 'rgb(128, 128, 128)';// tat
+
+    if ($("#" + id).css('color') == 'rgb(0, 128, 0)') {
+
         flag = false
         console.log("tat")
     } else {
 
-        //  document.getElementById(id).style.color = 'rgb(0, 128, 0)';// bat
+
         flag = true
         console.log("bat")
     }
