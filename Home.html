@@ -49,6 +49,9 @@
 		width: 50%;
 	}
 
+	input[data-readonly] {
+            pointer-events: none;
+        }
 
 
 	body {
@@ -68,6 +71,10 @@
 		-ms-transition: none !important;
 		transition: none !important;
 	}
+	.form-control:required:focus {
+            display: none;
+        }
+	
 </style>
 
 <body class="body">
@@ -216,7 +223,7 @@
 			<div>
 				<div class="input-group clockpicker" style="width: 150px; margin: auto; color: black;"
 					data-placement="left" data-align="top" data-autoclose="true">
-					<input class="form-control" readonly="true" style="font-size: 30px; text-align: center;"  type="text123" name="time" required>
+					<input  class="form-control" required style="font-size: 30px; text-align: center; outline: none;"  type="text123" name="time" >
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-time"></span>
 					</span>
@@ -366,7 +373,7 @@
 			<div>
 				<div class="input-group clockpicker" style="width: 150px; margin: auto; color: black;"
 					data-placement="left" data-align="top" data-autoclose="true">
-					<input id="updateTime" readonly="true" style="font-size: 30px; text-align: center;" class="form-control" type="text123" name="time" required>
+					<input required id="updateTime" readonly="true" style="font-size: 30px; text-align: center;" class="form-control" type="text123" name="time" required>
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-time"></span>
 					</span>
@@ -510,6 +517,10 @@
 	</script>
 
 	<script>
+     $(".form-control").on('keydown paste', function(e) {
+            e.preventDefault();
+        });
+
 		function dateboxColorForm(id) {
 			checkBox = $('#' + id);
 			
