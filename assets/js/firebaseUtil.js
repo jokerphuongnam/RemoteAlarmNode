@@ -13,6 +13,15 @@ firebase.initializeApp(firebaseConfig);
 
 var db = firebase.firestore();
 const list = document.querySelector('.thumbnails');
+// $( document ).ready(function() {
+//     console.log("ready----")
+  
+    
+//     console.log(alarmsList)
+
+
+//   });
+/*
 db.collection("alarms").onSnapshot(function (querySnapshot) {
     list.innerHTML = "";
     var alarms = [];
@@ -86,7 +95,7 @@ db.collection("alarms").onSnapshot(function (querySnapshot) {
 
     list.innerHTML = alarms;
 });
-
+*/
 
 
 function ChuMiNga(id) {
@@ -98,7 +107,7 @@ function ChuMiNga(id) {
         flag = true
     }
     
-    setTimeout(() => {
+    // setTimeout(() => {
         
         var ref = db.collection("alarms").doc(id.toString());
         ref.update({
@@ -111,7 +120,7 @@ function ChuMiNga(id) {
                 console.error("Error updating document: ", error);
             });
 
-}, 500);
+// }, 500);
 
     
 }
@@ -215,11 +224,11 @@ function changeColor(id) {
     var flag = false;
 
     if ($("#" + id).css('color') == 'rgb(0, 128, 0)') {
-
+        $("#" + id).css('color', 'rgb(128, 128, 128)')
         flag = false
         console.log("tat")
     } else {
-
+        $("#" + id).css('color', 'rgb(0, 128, 0)')
 
         flag = true
         console.log("bat")

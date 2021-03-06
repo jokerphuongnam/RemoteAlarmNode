@@ -50,8 +50,8 @@
 	}
 
 	input[data-readonly] {
-            pointer-events: none;
-        }
+		pointer-events: none;
+	}
 
 
 	body {
@@ -71,10 +71,10 @@
 		-ms-transition: none !important;
 		transition: none !important;
 	}
+
 	.form-control:required:focus {
-            display: none;
-        }
-	
+		display: none;
+	}
 </style>
 
 <body class="body">
@@ -132,44 +132,118 @@
 			<br> <br>
 			<hr>
 			<br>
-
+			
+			
+			
 			<!-- Thùng hàng chứa báo thức foreach ra -->
 			<div class="thumbnails">
-				<div class="box">
-					<br>
-					<!-- Color: Green = đã đặt báo thức  -->
-					<i id="alarmColor1" onclick="changeColor(id)" class="fa fa-clock-o"
-						style="font-size: 8rem; color: #808080;" aria-hidden="true"></i>
-					<div class="inner">
-						<h3>Hiển thị giờ báo thức ở đây</h3>
-						<p>Thêm title</p>
-						<p>
-							<span id="alarmColor1_mo" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080; text-align: center;border-radius: 4px;">Mon</span>
-							<span id="alarmColor1_tu" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Tue</span>
-							<span id="alarmColor1_we" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Wed</span>
-							<span id="alarmColor1_th" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Thu</span>
-							<span id="alarmColor1_fr" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Fri</span>
-							<span id="alarmColor1_sa" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Sat</span>
-							<span id="alarmColor1_su" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  #808080;text-align: center;border-radius: 4px;">Sun</span>
-						</p>
-						<p>Nút tích Repeat</p>
-						<button class="btn success" style="font-size: 20px" onclick="openAlarmForm()">Set Time</button>
-						<div style="line-height: 50%;">
-							<br>
+				<% alarmList.forEach(function(alarm){ %>
+					<div class="box">
+						<br>
+					
+						<!-- Color: Green = đã đặt báo thức  -->
+						<i id="<%= alarm.alarmId %>" onclick="changeColor(<%= alarm.alarmId %>)" class="fa fa-clock-o"
+							style="font-size: 8rem; color: <% if(alarm.started){ %>
+								#008000
+							  <% } else{ %>  
+								#808080
+							 <% } %>;" aria-hidden="true"></i>
+							
+						<div class="inner">
+							<h3><%=alarm.hour%> : <%=alarm.minute%></h3>
+							<p><%=alarm.title%></p>
+				
+							<p>
+								<span id="<%= alarm.alarmId %>_mo" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.monday){ %>
+									#008000
+								  <% } else{ %>  
+									#808080
+								 <% } %>; text-align: center;border-radius: 4px;">Mon</span>
+								<span id="<%= alarm.alarmId %>_tu" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.tuesday){ %>
+									#008000
+								  <% } else{ %>  
+									#808080
+								 <% } %>;text-align: center;border-radius: 4px;">Tue</span>
+								<span id="<%= alarm.alarmId %>_we" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.wednesday){ %>
+									#008000
+								  <% } else{ %>  
+									#808080
+								 <% } %>;text-align: center;border-radius: 4px;">Wed</span>
+								<span id="<%= alarm.alarmId %>_th" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.thursday){ %>
+									#008000
+								  <% } else{ %>  
+									#808080
+								 <% } %>;text-align: center;border-radius: 4px;">Thu</span>
+								<span id="<%= alarm.alarmId %>_fr" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color: <% if(alarm.friday){ %>
+									#008000
+								  <% } else{ %>  
+									#808080
+								 <% } %>;text-align: center;border-radius: 4px;">Fri</span>
+								<span id="<%= alarm.alarmId %>_sa" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.saturday){ %>
+									#008000
+								  <% } else{ %>  
+									#808080
+								 <% } %>;text-align: center;border-radius: 4px;">Sat</span>
+								<span id="<%= alarm.alarmId %>_su" onclick="dateboxColor(id)"
+								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.sunday){ %>
+									#008000
+								  <% } else{ %>  
+									#808080
+								 <% } %>;text-align: center;border-radius: 4px;">Sun</span>
+							</p>
+							
+				
+							
+							<!-- Checkbox Repeat-->
+							<div>
+								<div style="text-align: center;">
+									<div class="onoffswitch">
+										Repeat
+										<br>
+										<input type="checkbox"  <% if(alarm.recurring){ %>
+											checked
+										  <% } else{ %>  
+											
+										 <% } %> name="onoffswitch" class="onoffswitch-checkbox" 
+											id="s<%= alarm.alarmId %>" onclick="ChuMiNga(<%= alarm.alarmId %>)">
+										<label class="onoffswitch-label" for="s<%= alarm.alarmId %>">
+											<div class="onoffswitch-inner">
+												<div class="onoffswitch-active">
+													<div class="onoffswitch-switch">ON</div>
+												</div>
+												<div class="onoffswitch-inactive">
+													<div class="onoffswitch-switch">OFF</div>
+												</div>
+											</div>
+										</label>
+									</div>
+								</div>
+							</div>
+							<!-- Checkbox Repeat-->
+				
+					  
+					   
+				
+							<button class="btn success" style="font-size: 20px" onclick="openUpdateForm(<%= alarm.alarmId %>)">Set Time</button>
+							<div style="line-height:50%;">
+								<br>
+							</div>
+							<button class="btn danger" style="font-size: 20px" onclick="location.href='cancel/<%= alarm.alarmId %>'">Remove</button>
 						</div>
-						<button class="btn danger" style="font-size: 20px" onclick="openAlarmForm()">Remove</button>
 					</div>
-				</div>
-
+				 
+				<% }); %>
+				
+				
 
 			</div>
+
 		</div>
 	</div>
 
@@ -223,7 +297,8 @@
 			<div>
 				<div class="input-group clockpicker" style="width: 150px; margin: auto; color: black;"
 					data-placement="left" data-align="top" data-autoclose="true">
-					<input  class="form-control" required style="font-size: 30px; text-align: center; outline: none;"  type="text123" name="time" >
+					<input class="form-control" required style="font-size: 30px; text-align: center; outline: none;"
+						type="text123" name="time">
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-time"></span>
 					</span>
@@ -249,29 +324,36 @@
 			<br>
 			<div class="row2">
 				<div class="body2 column2" style="color: black;">
-					<input name="monday_cb" class="tgl tgl-skewed" id="alarmID_mo" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="monday_cb" class="tgl tgl-skewed" id="alarmID_mo" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Mon" data-tg-on="Mon" for="alarmID_mo"></label>
 					<br>
-					<input name="thursday_cb" class="tgl tgl-skewed" id="alarmID_th" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="thursday_cb" class="tgl tgl-skewed" id="alarmID_th" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Thu" data-tg-on="Thu" for="alarmID_th"></label>
 				</div>
 
 				<div class="body2 column2">
-					<input name="tuesday_cb" class="tgl tgl-skewed" id="alarmID_tu" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="tuesday_cb" class="tgl tgl-skewed" id="alarmID_tu" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Tue" data-tg-on="Tue" for="alarmID_tu"></label>
 					<br>
-					<input name="friday_cb" class="tgl tgl-skewed" id="alarmID_fr" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="friday_cb" class="tgl tgl-skewed" id="alarmID_fr" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Fri" data-tg-on="Fri" for="alarmID_fr"></label>
 					<br>
-					<input name="sunday_cb" class="tgl tgl-skewed" id="alarmID_su" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="sunday_cb" class="tgl tgl-skewed" id="alarmID_su" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Sun" data-tg-on="Sun" for="alarmID_su"></label>
 				</div>
 
 				<div class="body2 column2">
-					<input name="wednesday_cb" class="tgl tgl-skewed" id="alarmID_we" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="wednesday_cb" class="tgl tgl-skewed" id="alarmID_we" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Wed" data-tg-on="Wed" for="alarmID_we"></label>
 					<br>
-					<input name="saturday_cb" class="tgl tgl-skewed" id="alarmID_sa" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="saturday_cb" class="tgl tgl-skewed" id="alarmID_sa" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Sat" data-tg-on="Sat" for="alarmID_sa"></label>
 				</div>
 			</div>
@@ -285,7 +367,7 @@
 					<div class="onoffswitch">
 						Repeat
 						<br>
-						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" 
+						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
 							id="alarmId_Repeat_Inpopupform">
 						<label class="onoffswitch-label" for="alarmId_Repeat_Inpopupform">
 							<div class="onoffswitch-inner">
@@ -366,14 +448,16 @@
 		<form action="update.html" class="form-container" method="POST">
 
 			<div>
-				<label style="font-size: 25px;">ID:</label> <br> <input id="alarmMid" type="text" name="aid" readonly="true">
+				<label style="font-size: 25px;">ID:</label> <br> <input id="alarmMid" type="text" name="aid"
+					readonly="true">
 			</div>
 			<br>
 			<!-- Bootstrap clock-->
 			<div>
 				<div class="input-group clockpicker" style="width: 150px; margin: auto; color: black;"
 					data-placement="left" data-align="top" data-autoclose="true">
-					<input required id="updateTime" readonly="true" style="font-size: 30px; text-align: center;" class="form-control" type="text123" name="time" required>
+					<input required id="updateTime" readonly="true" style="font-size: 30px; text-align: center;"
+						class="form-control" type="text123" name="time" required>
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-time"></span>
 					</span>
@@ -387,7 +471,8 @@
 			<div>
 				<label style="font-size: 25px;">Nhập Tiêu Đề:</label>
 				<br>
-				<input id="updateTitle" type="text" name="title" style="font-size: 25px; color: black;" placeholder="Title" required>
+				<input id="updateTitle" type="text" name="title" style="font-size: 25px; color: black;"
+					placeholder="Title" required>
 			</div>
 			<!-- Tiêu đề-->
 
@@ -399,29 +484,36 @@
 			<br>
 			<div class="row2">
 				<div class="body2 column2" style="color: black;">
-					<input name="monday_cb" class="tgl tgl-skewed" id="alarmID_mo1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="monday_cb" class="tgl tgl-skewed" id="alarmID_mo1" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Mon" data-tg-on="Mon" for="alarmID_mo1"></label>
 					<br>
-					<input name="thursday_cb" class="tgl tgl-skewed" id="alarmID_th1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="thursday_cb" class="tgl tgl-skewed" id="alarmID_th1" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Thu" data-tg-on="Thu" for="alarmID_th1"></label>
 				</div>
 
 				<div class="body2 column2">
-					<input name="tuesday_cb" class="tgl tgl-skewed" id="alarmID_tu1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="tuesday_cb" class="tgl tgl-skewed" id="alarmID_tu1" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Tue" data-tg-on="Tue" for="alarmID_tu1"></label>
 					<br>
-					<input name="friday_cb" class="tgl tgl-skewed" id="alarmID_fr1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="friday_cb" class="tgl tgl-skewed" id="alarmID_fr1" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Fri" data-tg-on="Fri" for="alarmID_fr1"></label>
 					<br>
-					<input name="sunday_cb" class="tgl tgl-skewed" id="alarmID_su1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="sunday_cb" class="tgl tgl-skewed" id="alarmID_su1" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Sun" data-tg-on="Sun" for="alarmID_su1"></label>
 				</div>
 
 				<div class="body2 column2">
-					<input name="wednesday_cb" class="tgl tgl-skewed" id="alarmID_we1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="wednesday_cb" class="tgl tgl-skewed" id="alarmID_we1" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Wed" data-tg-on="Wed" for="alarmID_we1"></label>
 					<br>
-					<input name="saturday_cb" class="tgl tgl-skewed" id="alarmID_sa1" type="checkbox" onclick="dateboxColorForm(id)" />
+					<input name="saturday_cb" class="tgl tgl-skewed" id="alarmID_sa1" type="checkbox"
+						onclick="dateboxColorForm(id)" />
 					<label class="tgl-btn" data-tg-off="Sat" data-tg-on="Sat" for="alarmID_sa1"></label>
 				</div>
 			</div>
@@ -436,7 +528,7 @@
 						Repeat
 						<br>
 						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" "
-							id="alarmId_Repeat_Inpopupform1">
+							id=" alarmId_Repeat_Inpopupform1">
 						<label class="onoffswitch-label" for="alarmId_Repeat_Inpopupform1">
 							<div class="onoffswitch-inner">
 								<div class="onoffswitch-active">
@@ -517,13 +609,13 @@
 	</script>
 
 	<script>
-     $(".form-control").on('keydown paste', function(e) {
-            e.preventDefault();
-        });
+		$(".form-control").on('keydown paste', function (e) {
+			e.preventDefault();
+		});
 
 		function dateboxColorForm(id) {
 			checkBox = $('#' + id);
-			
+
 			if (checkBox.is(':checked')) {
 				console.log('checked')
 			} else {
@@ -532,12 +624,17 @@
 		}
 	</script>
 
+
+
+
 	<!-- The core Firebase JS SDK is always required and must be listed first -->
 	<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
 
 	<!-- TODO: Add SDKs for Firebase products that you want to use
 		 https://firebase.google.com/docs/web/setup#available-libraries -->
 	<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
+
+
 
 	<script src="assets/js/firebaseUtil.js"></script>
 	<script>

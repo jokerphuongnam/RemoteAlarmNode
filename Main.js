@@ -21,6 +21,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(upload.array()); 
 app.use(express.static('public'));
 
+// su dung ejs de gui data
+app.set('view engine', 'html');
+
+app.engine('html', require('ejs').renderFile);
 
 // lien ket router dieu huong
 var router = require('./router.js');
