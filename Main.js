@@ -26,9 +26,14 @@ app.set('view engine', 'html');
 
 app.engine('html', require('ejs').renderFile);
 
-// lien ket router dieu huong
+// cookie
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+// lien ket router dieu huong , luon de o cuoi
 var router = require('./router.js');
 app.use('/',router)
+
 
 // chay server
 app.listen(process.env.PORT || 5000, () => { // port 500 dung de test , port con lai dung chay heroku

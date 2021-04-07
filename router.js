@@ -9,6 +9,7 @@ const axios = require('axios') // thu vien cho phep tao http request
 const { Converter, Alarm } = require('./Alarm.js'); // import file Alarm.js vao
 const FormData = require('form-data');
 
+
 // server key cho firebase
 var serverKey = 'key=AAAAhO2bFYw:APA91bEzd3Rmnym3ln5nrDshVka0JuCLDnPJV7lY142_0JKhGJSHVel35nC-L2NzBXsvLK_WzTYEvJCDQoHHJX_EH6ivFb8q2y4xR8AqTRbQoaWJYnQ4sosH-k-3WwNethe0jIVWwWFS';
 
@@ -17,6 +18,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://remotealarmclock-2f98a.firebaseio.com"
 });
+
 
 //var token = "fZgGBrzpLBA:APA91bGr1JXwvKMqXmTu6bvfzm1LgL6VKinszgq_nO7_wyN91qCiyiljqdGc9TJHki95MIvBUFYGeLHMYg39gJl2ifS4leCmx6EtwkCc1K7dvviqVDk2EptfxD6LC5o3XIwXMDbG3XjL"
 
@@ -30,21 +32,11 @@ let config = {
 
 ///////////////////////////////////////////////mapping trang chu 
 router.get('/', function (req, res) { // url request
-//  res.sendFile(path.join(__dirname + '/Home.html'));
-  // fs.readFile('Home.html', function (err, data) { // file dc tra ve cho user laf home.html
-  //   res.writeHead(200, { 'Content-Type': 'text/html' }); // http code 200 ok
-  //   res.write(data);  // gui ve client
-  //   return res.end(); // ket thuc
-  // });
+  // kiem tra cookie login
+  const cookies = req.cookies; 
+  console.log('not-signed-cookies:', cookies);
 
-  // admin.firestore().collection("alarms").get().then((querySnapshot) => {
-  //   var alarms = [];
-  //   querySnapshot.forEach((doc) => {
-  //     // doc.data() is never undefined for query doc snapshots
-  //    // console.log(doc.id, " => ", doc.data());
-  //     alarms.push(doc.data()) 
-  //   });
-
+  
     var alarms = [];
     // const res1 = await axios.get('remotealarmapi.herokuapp.com/list');
     // console.log(res1.headers['content-type'])
@@ -77,40 +69,23 @@ router.get('/', function (req, res) { // url request
 ///////////////////////////////////////////////mapping trang about
 router.get('/AboutUs.html', function (req, res) {
   res.sendFile(path.join(__dirname + '/AboutUs.html'));
-  // fs.readFile('AboutUs.html', function (err, data) {
-  //   res.writeHead(200, { 'Content-Type': 'text/html' });
-  //   res.write(data);
-  //   return res.end();
-  // });
 });
 ///////////////////////////////////////////////mapping trang lost
 router.get('/Lost.html', function (req, res) {
   res.sendFile(path.join(__dirname + '/Lost.html'));
-  // fs.readFile('Lost.html', function (err, data) {
-  //   res.writeHead(200, { 'Content-Type': 'text/html' });
-  //   res.write(data);
-  //   return res.end();
-  // });
 });
 
 ///////////////////////////////////////////////mapping trang dang nhap (for fun)
 router.get('/SignIn.html', function (req, res) {
   res.sendFile(path.join(__dirname + '/SignIn.html'));
-  // fs.readFile('SignIn.html', function (err, data) {
-  //   res.writeHead(200, { 'Content-Type': 'text/html' });
-  //   res.write(data);
-  //   return res.end();
-  // });
 });
+
 ///////////////////////////////////////////////mapping trang dang ky (for fun)
 router.get('/SignUp.html', function (req, res) {
   res.sendFile(path.join(__dirname + '/SignUp.html'));
-  // fs.readFile('SignUp.html', function (err, data) {
-  //   res.writeHead(200, { 'Content-Type': 'text/html' });
-  //   res.write(data);
-  //   return res.end();
-  // });
 });
+
+
 
 
 ///////////////////////////////////////////////////////////////mapping update alarm
