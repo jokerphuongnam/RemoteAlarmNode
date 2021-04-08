@@ -164,7 +164,7 @@ axios({
 router.get('/cancel/:id', function (req, res) {
   let id = req.params.id
   const cookies = req.cookies;
-    axios.post(`https://remotealarmapi.herokuapp.com/cancel?uid=${cookies.uid}&aid=${id}`)
+    axios.get(`https://remotealarmapi.herokuapp.com/cancel?uid=${cookies.uid}&aid=${id}`)
     .then(ressta => {
       console.log(`statusCode: ${ressta.statusCode}`)
       res.redirect('/');
