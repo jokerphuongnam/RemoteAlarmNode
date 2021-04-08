@@ -87,12 +87,12 @@
 			<!-- Dẫn về Home-->
 			<a href="AboutUs.html">About Us</a>
 			<!-- Dẫn về Page About-->
-			<a href="Lost.html">Lost?</a>
+			<a href="/signOut">Lost?</a>
 			<!-- Dẫn đến Page hướng dẫn (Video hoặc Hình ảnh nếu thích)-->
 		</div>
 
 		<div class="header-right">
-			<a href="SignIn.html">Login</a>
+			Login <%= email %>
 			<!-- Dẫn đến Page Login-->
 		</div>
 	</div>
@@ -138,11 +138,11 @@
 			<!-- Thùng hàng chứa báo thức foreach ra -->
 			<div class="thumbnails">
 				<% alarmList.forEach(function(alarm){ %>
-					<div class="box">
+					<div id="<%= alarm.alarmId %>" class="box">
 						<br>
 					
 						<!-- Color: Green = đã đặt báo thức  -->
-						<i id="<%= alarm.alarmId %>" onclick="changeColor(<%= alarm.alarmId %>)" class="fa fa-clock-o"
+						<i id="<%= alarm.alarmId %>" class="fa fa-clock-o"
 							style="font-size: 8rem; color: <% if(alarm.started){ %>
 								#008000
 							  <% } else{ %>  
@@ -150,8 +150,8 @@
 							 <% } %>;" aria-hidden="true"></i>
 							
 						<div class="inner">
-							<h3><%=alarm.hour%> : <%=alarm.minute%></h3>
-							<p><%=alarm.title%></p>
+							<h3 id="time"><%=alarm.hour%>:<%=alarm.minute%></h3>
+							<p id="title"><%=alarm.title%></p>
 				
 							<p>
 								<span id="<%= alarm.alarmId %>_mo" onclick="dateboxColor(id)"
@@ -206,7 +206,7 @@
 									<div class="onoffswitch">
 										Repeat
 										<br>
-										<input type="checkbox"  <% if(alarm.recurring){ %>
+										<input id="recurring" type="checkbox"  <% if(alarm.recurring){ %>
 											checked
 										  <% } else{ %>  
 											
@@ -522,7 +522,7 @@
 			<br>
 
 			<!-- Checkbox Repeat-->
-			<div>
+			<!-- <div>
 				<div style="text-align: center;">
 					<div class="onoffswitch">
 						Repeat
@@ -541,7 +541,30 @@
 						</label>
 					</div>
 				</div>
+			</div> -->
+
+			<div>
+				<div style="text-align: center;">
+					<div class="onoffswitch">
+						Repeat
+						<br>
+						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+							id="alarmId_Repeat_Inpopupform4">
+						<label class="onoffswitch-label" for="alarmId_Repeat_Inpopupform4">
+							<div class="onoffswitch-inner">
+								<div class="onoffswitch-active">
+									<div class="onoffswitch-switch">ON</div>
+								</div>
+								<div class="onoffswitch-inactive">
+									<div class="onoffswitch-switch">OFF</div>
+								</div>
+							</div>
+						</label>
+					</div>
+				</div>
 			</div>
+		
+
 			<!-- Checkbox Repeat-->
 
 
