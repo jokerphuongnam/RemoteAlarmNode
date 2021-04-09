@@ -33,31 +33,31 @@ let config = {
 ///////////////////////////////////////////////mapping trang chu 
 router.get('/', function (req, res) { // url request
   // kiem tra cookie login
-  const cookies = req.cookies; 
+  const cookies = req.cookies;
   console.log('not-signed-cookies:', cookies);
   if (!cookies.email) { // chi can su dung email
-    res.redirect('/SignIn.html');
+    res.redirect('/SignIn1.html');
   }
-  
-    var alarms = [];
-    // const res1 = await axios.get('remotealarmapi.herokuapp.com/list');
-    // console.log(res1.headers['content-type'])
-    
-    axios.get(`https://remotealarmapi.herokuapp.com/list?uid=${cookies.uid}`)
-  .then(function (response) {
-    // handle success
-    console.log('thanh cong');
-    //console.log(response.data);
-    res.render(__dirname + "/Home.html", {alarmList: response.data, email: cookies.email})
-  })
-  .catch(function (error) {
-    // handle error
-    console.log('loi');
-    console.log(error);
-  })
-  .then(function () {
-    // always executed
-  });
+
+  var alarms = [];
+  // const res1 = await axios.get('remotealarmapi.herokuapp.com/list');
+  // console.log(res1.headers['content-type'])
+
+  axios.get(`https://remotealarmapi.herokuapp.com/list?uid=${cookies.uid}`)
+    .then(function (response) {
+      // handle success
+      console.log('thanh cong');
+      //console.log(response.data);
+      res.render(__dirname + "/Home.html", { alarmList: response.data, email: cookies.email })
+    })
+    .catch(function (error) {
+      // handle error
+      console.log('loi');
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
 
 
 });
@@ -65,18 +65,24 @@ router.get('/', function (req, res) { // url request
 
 ///////////////////////////////////////////////mapping trang about
 router.get('/AboutUs.html', function (req, res) {
- 
- // res.sendFile(path.join(__dirname + '/AboutUs.html'));
+
+  // res.sendFile(path.join(__dirname + '/AboutUs.html'));
+});
+
+///////////////////////////////////////////////mapping trang not pairt
+router.get('/notPairYet', function (req, res) {
+
+   res.sendFile(path.join(__dirname + '/notPairYet.html'));
 });
 ///////////////////////////////////////////////mapping trang lost
 router.get('/signOut', function (req, res) {
   res.clearCookie('email'); // chi su dung email de check
-  res.redirect('/SignIn.html');
+  res.redirect('/SignIn1.html');
 });
 
 ///////////////////////////////////////////////mapping trang dang nhap (for fun)
-router.get('/SignIn.html', function (req, res) {
-  res.sendFile(path.join(__dirname + '/SignIn.html'));
+router.get('/SignIn1.html', function (req, res) {
+  res.sendFile(path.join(__dirname + '/SignIn1.html'));
 });
 
 ///////////////////////////////////////////////mapping trang dang ky (for fun)
@@ -92,8 +98,8 @@ router.post('/update.html', function (req, res) {
   let data = req.body // lay data gui len tu form 
   var time = data.time.toString()  // name cua input la time <input name="time" >
   console.log(time)
-  const cookies = req.cookies; 
-  
+  const cookies = req.cookies;
+
   let title = data.title // // name cua input la title <input name="title" >
   let recurring = (data.onoffswitch == undefined ? "false" : "true")
   let monday = (data.monday_cb == undefined ? "false" : "true")
@@ -103,7 +109,7 @@ router.post('/update.html', function (req, res) {
   let friday = (data.friday_cb == undefined ? "false" : "true")
   let saturday = (data.saturday_cb == undefined ? "false" : "true")
   let sunday = (data.sunday_cb == undefined ? "false" : "true")
-  
+
   // khoi tao data gui thong bao den mobile
   let id = data.aid
 
@@ -135,42 +141,42 @@ router.post('/update.html', function (req, res) {
 
 
 
-axios({
-  method: 'post',
-  url: 'http://remotealarmapi.herokuapp.com/update',
-  data: bodyFormData,
-  headers: {
+  axios({
+    method: 'post',
+    url: 'http://remotealarmapi.herokuapp.com/update',
+    data: bodyFormData,
+    headers: {
       'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`,
-  },
-}).then(respo => {
+    },
+  }).then(respo => {
     console.log(`statusCode: ${respo.statusCode}`)
     console.log("gui thanh cong")
     res.redirect('/');
   })
-  .catch(error => {
-    console.error(error)
-    console.log("gui bi loi")
-  })
-  .catch(error => {
-    console.error(error)
-  })
-  
+    .catch(error => {
+      console.error(error)
+      console.log("gui bi loi")
+      res.redirect('/notPairYet');
+    })
 
 
- 
+
+
 });
 
 ///////////////////////////////////////////////////////////////mapping cancel alarm
 router.get('/cancel/:id', function (req, res) {
   let id = req.params.id
   const cookies = req.cookies;
-    axios.get(`https://remotealarmapi.herokuapp.com/cancel?uid=${cookies.uid}&aid=${id}`)
+  axios.get(`https://remotealarmapi.herokuapp.com/cancel?uid=${cookies.uid}&aid=${id}`)
     .then(ressta => {
       console.log(`statusCode: ${ressta.statusCode}`)
       res.redirect('/');
     })
     .catch(error => {
       console.error(error)
+      console.log("gui bi loi")
+      res.redirect('/notPairYet');
     })
 });
 
@@ -211,26 +217,24 @@ router.post('/new.html', function (req, res) {
 
 
 
-axios({
-  method: 'post',
-  url: 'http://remotealarmapi.herokuapp.com/new',
-  data: bodyFormData,
-  headers: {
+  axios({
+    method: 'post',
+    url: 'http://remotealarmapi.herokuapp.com/new',
+    data: bodyFormData,
+    headers: {
       'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`,
-  },
-}).then(respo => {
+    },
+  }).then(respo => {
     console.log(`statusCode: ${respo.statusCode}`)
     console.log("gui thanh cong")
     res.redirect('/');
   })
-  .catch(error => {
-    console.error(error)
-    console.log("gui bi loi")
-  })
-  .catch(error => {
-    console.error(error)
-  })
-  
+    .catch(error => {
+      console.error(error)
+      console.log("gui bi loi")
+      console.log("gui bi loi")
+      res.redirect('/notPairYet');
+    })
   // dieu huong ve home
 
 });
