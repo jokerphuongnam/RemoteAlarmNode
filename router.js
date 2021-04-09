@@ -232,7 +232,6 @@ router.post('/new.html', function (req, res) {
     .catch(error => {
       console.error(error)
       console.log("gui bi loi")
-      console.log("gui bi loi")
       res.redirect('/notPairYet');
     })
   // dieu huong ve home
