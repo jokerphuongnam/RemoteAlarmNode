@@ -48,7 +48,7 @@ router.get('/', function (req, res) { // url request
       // handle success
 
       console.log('thanh cong');
-      axios.get(`http://lamapi.somee.com/api/quote/random`)
+      axios.get(`http://lamapimongodb.somee.com/api/quote/random`)
       .then(function (quote) {
         // handle success
        
