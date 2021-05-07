@@ -46,9 +46,15 @@ router.get('/', function (req, res) { // url request
   axios.get(`https://remotealarmapi.herokuapp.com/list?uid=${cookies.uid}`)
     .then(function (response) {
       // handle success
+
       console.log('thanh cong');
-      //console.log(response.data);
-      res.render(__dirname + "/Home.html", { alarmList: response.data, email: cookies.email })
+      axios.get(`http://lamapi.somee.com/api/quote/random`)
+      .then(function (quote) {
+        // handle success
+       
+        res.render(__dirname + "/Home.html", { alarmList: response.data, email: cookies.email, quote:   quote.data.text.replace("/N", '<br>')})
+      })
+    
     })
     .catch(function (error) {
       // handle error
@@ -58,6 +64,8 @@ router.get('/', function (req, res) { // url request
     .then(function () {
       // always executed
     });
+
+  
 
 
 });

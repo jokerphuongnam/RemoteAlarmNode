@@ -193,9 +193,8 @@ function dateboxColor(id) {
 function openUpdateForm(id) {
     $("#update").show()
     $("#alarmMid").val(id)
-
-    $("#updateTitle").val($(`#${id} #title`).text())
-    $("#updateTime").val($(`#${id} #time`).text())
+    $("#updateTitle").val($(`#${id} #title`).text().trim())
+    $("#updateTime").val($(`#${id} #time`).text().replace(/\s+/g, '').trim())
 
     $('#alarmID_mo1').prop('checked', isCheck(`#${id}_mo`))
     $('#alarmID_sa1').prop('checked', isCheck(`#${id}_sa`))

@@ -14,6 +14,7 @@
 	<link rel="shortcut icon" type="image/png" href="cloud-clock.png" />
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="dist/bootstrap-clockpicker.min.css">
+	<link rel="stylesheet" href="assets/css/QuoteBoxStyle.css">
 </head>
 <style>
 	.datebox-active {
@@ -87,19 +88,29 @@
 			<!-- Dẫn về Home-->
 			<a href="AboutUs.html">About Us</a>
 			<!-- Dẫn về Page About-->
-			<a href="/signOut">Lost?</a>
+			<a href="/signOut">Sign Out</a>
 			<!-- Dẫn đến Page hướng dẫn (Video hoặc Hình ảnh nếu thích)-->
 		</div>
 
 		<div class="header-right">
 			Login <%= email %>
-			<!-- Dẫn đến Page Login-->
+				<!-- Dẫn đến Page Login-->
 		</div>
 	</div>
 	<br>
 	<br>
 	<!-- Banner -->
-	<div class="slideshow-container">
+	<div class="quotebox"><i class="fas fa-quote-left fa2"></i>
+		<div class="text"><i class="fas fa-quote-right fa1"></i>
+			<div>
+				<h3>Quote of the day</h3>
+				<hr>
+				<p> <%-quote%></p>
+				<!-- <p style="text-align:right">~Huấn Hoa Hồng~</p> -->
+			</div>
+		</div>
+	</div>
+	<!-- <div class="slideshow-container">
 		<div class="mySlides fade">
 			<img src="images/LDK.png" style="width: 100%">
 		</div>
@@ -115,12 +126,14 @@
 		<div class="mySlides fade">
 			<img src="images/PPN.png" style="width: 100%">
 		</div>
-	</div>
-	<br>
+	</div> -->
 
+	<br>
+	
 	<!-- Banner -->
 
 	<!-- Main -->
+	
 	<div id="main">
 		<div class="inner">
 
@@ -132,115 +145,124 @@
 			<br> <br>
 			<hr>
 			<br>
-			
-			
-			
+
+
+
 			<!-- Thùng hàng chứa báo thức foreach ra -->
 			<div class="thumbnails">
 				<% alarmList.forEach(function(alarm){ %>
 					<div id="<%= alarm.alarmId %>" class="box">
 						<br>
-					
-						<!-- Color: Green = đã đặt báo thức  -->
-						<i id="<%= alarm.alarmId %>" class="fa fa-clock-o"
-							style="font-size: 8rem; color: <% if(alarm.started){ %>
+								<!-- Color: Green = đã đặt báo thức  -->
+								<i id="<%= alarm.alarmId %>" class="fa fa-clock-o" style="font-size: 8rem; color: <% if(alarm.started){ %>
 								#008000
 							  <% } else{ %>  
 								#808080
 							 <% } %>;" aria-hidden="true"></i>
-							
-						<div class="inner">
-							<h3 id="time"><%=alarm.hour%>:<%=alarm.minute%></h3>
-							<p id="title"><%=alarm.title%></p>
-				
-							<p>
-								<span id="<%= alarm.alarmId %>_mo" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.monday){ %>
+
+								<div class="inner">
+									<!-- <h3 id="time"><%=alarm.hour%>:<%=alarm.minute%></h3> -->
+									<h3 id="time">
+										<% if(alarm.hour < 10){ %>
+											0<%=alarm.hour%>
+											<% } else{ %>
+												<%=alarm.hour%>
+												<% } %>
+												:<% if(alarm.minute < 10){ %>
+												0<%=alarm.minute%>
+												<% } else{ %>
+													<%=alarm.minute%>
+													<% } %>
+									</h3>
+									<p id="title">
+										<%=alarm.title%>
+									</p>
+
+									<p>
+										<span id="<%= alarm.alarmId %>_mo" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.monday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>; text-align: center;border-radius: 4px;">Mon</span>
-								<span id="<%= alarm.alarmId %>_tu" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.tuesday){ %>
+										<span id="<%= alarm.alarmId %>_tu" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.tuesday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Tue</span>
-								<span id="<%= alarm.alarmId %>_we" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.wednesday){ %>
+										<span id="<%= alarm.alarmId %>_we" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.wednesday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Wed</span>
-								<span id="<%= alarm.alarmId %>_th" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.thursday){ %>
+										<span id="<%= alarm.alarmId %>_th" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.thursday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Thu</span>
-								<span id="<%= alarm.alarmId %>_fr" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color: <% if(alarm.friday){ %>
+										<span id="<%= alarm.alarmId %>_fr" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color: <% if(alarm.friday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Fri</span>
-								<span id="<%= alarm.alarmId %>_sa" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.saturday){ %>
+										<span id="<%= alarm.alarmId %>_sa" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.saturday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Sat</span>
-								<span id="<%= alarm.alarmId %>_su" onclick="dateboxColor(id)"
-								style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.sunday){ %>
+										<span id="<%= alarm.alarmId %>_su" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.sunday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Sun</span>
-							</p>
-							
-				
-							
-							<!-- Checkbox Repeat-->
-							<div>
-								<div style="text-align: center;">
-									<div class="onoffswitch">
-										Repeat
-										<br>
-										<input id="recurring" type="checkbox"  <% if(alarm.recurring){ %>
-											checked
-										  <% } else{ %>  
-											
-										 <% } %> name="onoffswitch" class="onoffswitch-checkbox" 
-											id="s<%= alarm.alarmId %>" onclick="ChuMiNga(<%= alarm.alarmId %>)">
-										<label class="onoffswitch-label" for="s<%= alarm.alarmId %>">
-											<div class="onoffswitch-inner">
-												<div class="onoffswitch-active">
-													<div class="onoffswitch-switch">ON</div>
-												</div>
-												<div class="onoffswitch-inactive">
-													<div class="onoffswitch-switch">OFF</div>
-												</div>
+									</p>
+
+
+
+									<!-- Checkbox Repeat-->
+									<div>
+										<div style="text-align: center;">
+											<div class="onoffswitch">
+												Repeat
+												<br>
+												<input id="recurring" type="checkbox" <% if(alarm.recurring){ %>
+												checked
+												<% } else{ %>
+
+													<% } %> name="onoffswitch" class="onoffswitch-checkbox"
+														id="s<%= alarm.alarmId %>" onclick="ChuMiNga(<%= alarm.alarmId
+																%>)">
+																<label class="onoffswitch-label"
+																	for="s<%= alarm.alarmId %>">
+																	<div class="onoffswitch-inner">
+																		<div class="onoffswitch-active">
+																			<div class="onoffswitch-switch">ON</div>
+																		</div>
+																		<div class="onoffswitch-inactive">
+																			<div class="onoffswitch-switch">OFF</div>
+																		</div>
+																	</div>
+																</label>
 											</div>
-										</label>
+										</div>
 									</div>
+									<!-- Checkbox Repeat-->
+
+
+
+
+									<button class="btn success" style="font-size: 20px"
+										onclick="openUpdateForm(<%= alarm.alarmId %>)">Set Time</button>
+									<div style="line-height:50%;">
+										<br>
+									</div>
+									<button class="btn danger" style="font-size: 20px"
+										onclick="location.href='cancel/<%= alarm.alarmId %>'">Remove</button>
 								</div>
-							</div>
-							<!-- Checkbox Repeat-->
-				
-					  
-					   
-				
-							<button class="btn success" style="font-size: 20px" onclick="openUpdateForm(<%= alarm.alarmId %>)">Set Time</button>
-							<div style="line-height:50%;">
-								<br>
-							</div>
-							<button class="btn danger" style="font-size: 20px" onclick="location.href='cancel/<%= alarm.alarmId %>'">Remove</button>
-						</div>
 					</div>
-				 
-				<% }); %>
-				
-				
+
+					<% }); %>
+
+
 
 			</div>
 
@@ -563,7 +585,7 @@
 					</div>
 				</div>
 			</div>
-		
+
 
 			<!-- Checkbox Repeat-->
 
