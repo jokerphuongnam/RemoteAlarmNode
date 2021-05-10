@@ -105,7 +105,9 @@
 			<div>
 				<h3>Quote of the day</h3>
 				<hr>
-				<p> <%-quote%></p>
+				<p>
+					<%-quote%>
+				</p>
 				<!-- <p style="text-align:right">~Huấn Hoa Hồng~</p> -->
 			</div>
 		</div>
@@ -129,11 +131,11 @@
 	</div> -->
 
 	<br>
-	
+
 	<!-- Banner -->
 
 	<!-- Main -->
-	
+
 	<div id="main">
 		<div class="inner">
 
@@ -153,174 +155,128 @@
 				<% alarmList.forEach(function(alarm){ %>
 					<div id="<%= alarm.alarmId %>" class="box">
 						<br>
-								<!-- Color: Green = đã đặt báo thức  -->
-								<i id="<%= alarm.alarmId %>" class="fa fa-clock-o" style="font-size: 8rem; color: <% if(alarm.started){ %>
+						<!-- Color: Green = đã đặt báo thức  -->
+						<i id="<%= alarm.alarmId %>" class="fa fa-clock-o" style="font-size: 8rem; color: <% if(alarm.started){ %>
 								#008000
 							  <% } else{ %>  
 								#808080
 							 <% } %>;" aria-hidden="true"></i>
 
-								<div class="inner">
-									<!-- <h3 id="time"><%=alarm.hour%>:<%=alarm.minute%></h3> -->
-									<h3 id="time">
-										<% if(alarm.hour < 10){ %>
-											0<%=alarm.hour%>
-											<% } else{ %>
-												<%=alarm.hour%>
+						<div class="inner">
+							<!-- <h3 id="time"><%=alarm.hour%>:<%=alarm.minute%></h3> -->
+							<h3 id="time">
+								<% if(alarm.hour < 10){ %>
+									0<%=alarm.hour%>
+										<% } else{ %>
+											<%=alarm.hour%>
 												<% } %>
-												:<% if(alarm.minute < 10){ %>
-												0<%=alarm.minute%>
-												<% } else{ %>
-													<%=alarm.minute%>
-													<% } %>
-									</h3>
-									<p id="title">
-										<%=alarm.title%>
-									</p>
+													:<% if(alarm.minute < 10){ %>
+														0<%=alarm.minute%>
+															<% } else{ %>
+																<%=alarm.minute%>
+																	<% } %>
+							</h3>
+							<p id="title">
+								<%=alarm.title%>
+							</p>
 
-									<p>
-										<span id="<%= alarm.alarmId %>_mo" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.monday){ %>
+							<p>
+								<span id="<%= alarm.alarmId %>_mo" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.monday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>; text-align: center;border-radius: 4px;">Mon</span>
-										<span id="<%= alarm.alarmId %>_tu" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.tuesday){ %>
+								<span id="<%= alarm.alarmId %>_tu" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.tuesday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Tue</span>
-										<span id="<%= alarm.alarmId %>_we" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.wednesday){ %>
+								<span id="<%= alarm.alarmId %>_we" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.wednesday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Wed</span>
-										<span id="<%= alarm.alarmId %>_th" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.thursday){ %>
+								<span id="<%= alarm.alarmId %>_th" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.thursday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Thu</span>
-										<span id="<%= alarm.alarmId %>_fr" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color: <% if(alarm.friday){ %>
+								<span id="<%= alarm.alarmId %>_fr" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color: <% if(alarm.friday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Fri</span>
-										<span id="<%= alarm.alarmId %>_sa" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.saturday){ %>
+								<span id="<%= alarm.alarmId %>_sa" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.saturday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Sat</span>
-										<span id="<%= alarm.alarmId %>_su" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.sunday){ %>
+								<span id="<%= alarm.alarmId %>_su" onclick="dateboxColor(id)" style="cursor: pointer; font-weight: bold;font-size: 14px;line-height: 35px ; width: 35px; border: 2px solid;display: inline-block;color:  <% if(alarm.sunday){ %>
 									#008000
 								  <% } else{ %>  
 									#808080
 								 <% } %>;text-align: center;border-radius: 4px;">Sun</span>
-									</p>
+							</p>
 
 
 
-									<!-- Checkbox Repeat-->
-									<div>
-										<div style="text-align: center;">
-											<div class="onoffswitch">
-												Repeat
-												<br>
-												<input id="recurring" type="checkbox" <% if(alarm.recurring){ %>
-												checked
-												<% } else{ %>
-
-													<% } %> name="onoffswitch" class="onoffswitch-checkbox"
-														id="s<%= alarm.alarmId %>" onclick="ChuMiNga(<%= alarm.alarmId
-																%>)">
-																<label class="onoffswitch-label"
-																	for="s<%= alarm.alarmId %>">
-																	<div class="onoffswitch-inner">
-																		<div class="onoffswitch-active">
-																			<div class="onoffswitch-switch">ON</div>
-																		</div>
-																		<div class="onoffswitch-inactive">
-																			<div class="onoffswitch-switch">OFF</div>
-																		</div>
-																	</div>
-																</label>
-											</div>
-										</div>
-									</div>
-									<!-- Checkbox Repeat-->
-
-
-
-
-									<button class="btn success" style="font-size: 20px"
-										onclick="openUpdateForm(<%= alarm.alarmId %>)">Set Time</button>
-									<div style="line-height:50%;">
+							<!-- Checkbox Repeat-->
+							<div>
+								<div style="text-align: center;">
+									<div class="onoffswitch">
+										Repeat
 										<br>
+										<input id="recurring" type="checkbox" <% if(alarm.recurring){ %>
+										checked
+										<% } else{ %>
+
+											<% } %> name="onoffswitch" class="onoffswitch-checkbox"
+												id="s<%= alarm.alarmId %>" onclick="ChuMiNga(<%= alarm.alarmId %>)">
+														<label class="onoffswitch-label" for="s<%= alarm.alarmId %>">
+															<div class="onoffswitch-inner">
+																<div class="onoffswitch-active">
+																	<div class="onoffswitch-switch">ON</div>
+																</div>
+																<div class="onoffswitch-inactive">
+																	<div class="onoffswitch-switch">OFF</div>
+																</div>
+															</div>
+														</label>
 									</div>
-									<button class="btn danger" style="font-size: 20px"
-										onclick="location.href='cancel/<%= alarm.alarmId %>'">Remove</button>
 								</div>
+							</div>
+							<!-- Checkbox Repeat-->
+
+							<button class="btn success" style="font-size: 20px"
+								onclick="openUpdateForm(<%= alarm.alarmId %>)">Set Time</button>
+							<div style="line-height:50%;">
+								<br>
+							</div>
+							<button class="btn danger" style="font-size: 20px"
+								onclick="openDeleteForm(<%= alarm.alarmId %>)">Remove</button>
+							<!-- <button class="btn danger" style="font-size: 20px"
+								onclick="location.href='cancel/<%= alarm.alarmId %>'">Remove</button> -->
+						</div>
 					</div>
 
 					<% }); %>
 
-
-
 			</div>
-
 		</div>
 	</div>
 
-	<!-- Popup cái set bao thức
-	<div class="modal" id="alarmId">
-		<div class="form-popup modal-content">
-			<form action="new.html" class="form-container" method="POST">
-				<div>
-					<label style="font-size: 25px;">Chọn giờ:</label> <input name="time" style="font-size: 25px;"
-						type="time" required>
-				</div>
-
-				<br>
-
-				<div>
-					<label style="font-size: 25px;">Nhập Tiêu Đề:</label> <br> <input type="text" name="title"
-						placeholder="Title">
-				</div>
-
-				<br> <label>Chọn ngày báo thức</label> <br>
-
-				<div>
-					<label">Mon <input type="checkbox" checked="checked">
-						</label> <label>- Tues <input type="checkbox" checked="checked">
-						</label> <label>- Wed <input type="checkbox" checked="checked">
-						</label> <label>- Thus <input type="checkbox" checked="checked">
-						</label> <label>- Fri <input type="checkbox" checked="checked">
-						</label> <label>- Sat <input type="checkbox" checked="checked">
-						</label> <label>- Sun <input type="checkbox" checked="checked">
-						</label>
-				</div>
-
-				<br>
-
-				<div>
-					<label>Repeat <input type="radio" name="radio">
-					</label>
-				</div>
-				<br> <br>
-				<button class="btn success">Set</button>
-				<button class="btn danger" onclick="closeAlarmForm()">Cancel</button>
-			</form>
-
-		</div>
-	</div> -->
+	<!-- Popup cái set bao thức -->
 
 	<div class="form-popup" id="alarmId">
-		<form action="new.html" class="form-container" method="POST">
+		<form name="insertForm" action="new.html" onsubmit="return validateInsertForm()" class="form-container"
+			method="POST">
 
 			<!-- Bootstrap clock-->
 			<div>
 				<div class="input-group clockpicker" style="width: 150px; margin: auto; color: black;"
 					data-placement="left" data-align="top" data-autoclose="true">
 					<input class="form-control" required style="font-size: 30px; text-align: center; outline: none;"
-						type="text123" name="time">
+						type="text123" name="time" value="00:00">
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-time"></span>
 					</span>
@@ -334,7 +290,8 @@
 			<div>
 				<label style="font-size: 25px;">Nhập Tiêu Đề:</label>
 				<br>
-				<input type="text" name="title" style="font-size: 25px; color: black;" placeholder="Title" required>
+				<input type="text" name="title" style="font-size: 25px; color: black;" placeholder="Title">
+				<label id="errorLabel1" style=" margin-top: 1em; font-size: 20px; color: rgb(255, 1, 22);"></label>
 			</div>
 			<!-- Tiêu đề-->
 
@@ -417,57 +374,10 @@
 	</div>
 
 	<!-- Popup cái update bao thức -->
-	<!-- <div class="modal" id="update">
-		<div class="form-popup modal-content">
-			<form action="update.html" method="post" class="form-container">
-
-				<div>
-					<label style="font-size: 25px;">ID:</label> <br> <input id="alarmMid" type="text" name="aid">
-				</div>
-				<br>
-				<div>
-					<label style="font-size: 25px;">Chọn giờ:</label> <input name="time" style="font-size: 25px;"
-						type="time" required>
-				</div>
-
-				<br>
-
-				<div>
-					<label style="font-size: 25px;">Nhập Tiêu Đề:</label> <br> <input type="text" name="title"
-						placeholder="Title">
-				</div>
-
-				<br> <label>Chọn ngày báo thức</label> <br>
-
-				<div>
-					<label">Mon <input type="checkbox" checked="checked">
-						</label> <label>- Tues <input type="checkbox" checked="checked">
-						</label> <label>- Wed <input type="checkbox" checked="checked">
-						</label> <label>- Thus <input type="checkbox" checked="checked">
-						</label> <label>- Fri <input type="checkbox" checked="checked">
-						</label> <label>- Sat <input type="checkbox" checked="checked">
-						</label> <label>- Sun <input type="checkbox" checked="checked">
-						</label>
-				</div>
-
-				<br>
-
-
-				<div>
-					<label>Repeat <input type="radio" name="radio">
-					</label>
-				</div>
-				<br> <br>
-				<button class="btn success" type="submit">Set</button>
-				<button class="btn danger" onclick="closeUpdateForm()">Cancel</button>
-			</form>
-
-		</div>
-	</div> -->
-
 
 	<div class="form-popup" id="update">
-		<form action="update.html" class="form-container" method="POST">
+		<form name="updateForm" action="update.html" onsubmit="return validateUpdateForm()" class="form-container"
+			method="POST">
 
 			<div>
 				<label style="font-size: 25px;">ID:</label> <br> <input id="alarmMid" type="text" name="aid"
@@ -479,7 +389,7 @@
 				<div class="input-group clockpicker" style="width: 150px; margin: auto; color: black;"
 					data-placement="left" data-align="top" data-autoclose="true">
 					<input required id="updateTime" readonly="true" style="font-size: 30px; text-align: center;"
-						class="form-control" type="text123" name="time" required>
+						class="form-control" type="text123" value="00:00" name="time" required>
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-time"></span>
 					</span>
@@ -494,7 +404,8 @@
 				<label style="font-size: 25px;">Nhập Tiêu Đề:</label>
 				<br>
 				<input id="updateTitle" type="text" name="title" style="font-size: 25px; color: black;"
-					placeholder="Title" required>
+					placeholder="Title">
+				<label id="errorLabel" style=" margin-top: 1em; font-size: 20px; color: rgb(255, 1, 22);"></label>
 			</div>
 			<!-- Tiêu đề-->
 
@@ -543,27 +454,6 @@
 
 			<br>
 
-			<!-- Checkbox Repeat-->
-			<!-- <div>
-				<div style="text-align: center;">
-					<div class="onoffswitch">
-						Repeat
-						<br>
-						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" "
-							id=" alarmId_Repeat_Inpopupform1">
-						<label class="onoffswitch-label" for="alarmId_Repeat_Inpopupform1">
-							<div class="onoffswitch-inner">
-								<div class="onoffswitch-active">
-									<div class="onoffswitch-switch">ON</div>
-								</div>
-								<div class="onoffswitch-inactive">
-									<div class="onoffswitch-switch">OFF</div>
-								</div>
-							</div>
-						</label>
-					</div>
-				</div>
-			</div> -->
 
 			<div>
 				<div style="text-align: center;">
@@ -586,9 +476,7 @@
 				</div>
 			</div>
 
-
 			<!-- Checkbox Repeat-->
-
 
 			<br>
 			<br>
@@ -598,6 +486,21 @@
 			<button class="btn danger " type="button" onclick="closeUpdateForm() ">Cancel</button>
 		</form>
 	</div>
+	<!--delete form -->
+	<div class="form-popup" id="delete">
+		<form id="deleteForm" name="deleteForm" class="form-container" method="GET">
+			<!-- Tiêu đề-->
+			<div>
+				<label style="font-size: 25px;">Xác nhận xóa báo thức </label>
+				<br>
+			</div>
+			<!-- Tiêu đề-->
+			<br>
+			<!-- Nút End form-->
+			<button class="btn success" id="delete_confirm">OK</button>
+			<button class="btn danger " type="button" onclick="closeDeleteForm() ">Cancel</button>
+		</form>
+	</div> -->
 
 	<hr>
 
@@ -685,7 +588,7 @@
 	<script>
 		/////////////////Banner//////////////////
 		var slideIndex = 0;
-		showSlides();
+		//showSlides();
 
 		function showSlides() {
 			var i;
@@ -714,7 +617,26 @@
 
 		function closeUpdateForm() {
 			$("#update").hide()
+		}
 
+		function closeDeleteForm() {
+			$("#delete").hide()
+		}
+
+		function validateUpdateForm() {
+			var x = document.forms["updateForm"]["title"].value;
+			if (x == "") {
+				document.getElementById('errorLabel').innerHTML = 'Không để trống title';
+				return false;
+			}
+		}
+
+		function validateInsertForm() {
+			var x = document.forms["insertForm"]["title"].value;
+			if (x == "") {
+				document.getElementById('errorLabel1').innerHTML = 'Không để trống title';
+				return false;
+			}
 		}
 	</script>
 
