@@ -86,16 +86,17 @@
 		<div class="header-center">
 			<a class="active" href="/">Home</a>
 			<!-- Dẫn về Home-->
-			<a href="AboutUs.html">About Us</a>
-			<!-- Dẫn về Page About-->
-			<a href="/signOut">Sign Out</a>
-			<!-- Dẫn đến Page hướng dẫn (Video hoặc Hình ảnh nếu thích)-->
+			<a href="https://1drv.ms/w/s!At5oxsUm4Dn0mmMS5nvq_ARhaIlv?e=TxDj31">About Us</a>
+
 		</div>
 
 		<div class="header-right">
-			Login <%= email %>
-				<!-- Dẫn đến Page Login-->
+			<!-- Dẫn đến Page Login-->
+			<img id="userPhoto" alt="User Photo" width="50" height="50" src="">
+			<a href="/signOut">Sign Out <%= email %></a>
+			<!-- Login <%= email %> -->
 		</div>
+
 	</div>
 	<br>
 	<br>
@@ -108,7 +109,7 @@
 				<p>
 					<%-quote%>
 				</p>
-				<!-- <p style="text-align:right">~Huấn Hoa Hồng~</p> -->
+
 			</div>
 		</div>
 	</div>
@@ -589,7 +590,19 @@
 		/////////////////Banner//////////////////
 		var slideIndex = 0;
 		//showSlides();
-
+		function readCookie(name) {
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for (var i = 0; i < ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+				if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+			}
+			return null;
+		}
+		// console.log('Cookie photo')
+		// console.log(readCookie('photoURL'))
+		document.getElementById("userPhoto").src = readCookie('photoURL');
 		function showSlides() {
 			var i;
 			var slides = $(".mySlides");

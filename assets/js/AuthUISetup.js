@@ -9,7 +9,7 @@ ui.start('#firebaseui-auth-container', {
          setCookie("displayName", authResult.user.displayName, 1)
          setCookie("email", authResult.user.email, 1)
          setCookie("uid", authResult.user.uid, 1)
-
+         setCookie("photoURL", authResult.user.photoURL, 1)
           return true;
         },
         uiShown: function() {
