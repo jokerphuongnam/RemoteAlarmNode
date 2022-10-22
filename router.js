@@ -13,10 +13,9 @@ admin.initializeApp({
   databaseURL: "https://remotealarm-e4b87.firebaseio.com"
 });
 
-const baseAlarmUrl = `https://remotealarmapi.herokuapp.com/`
-const baseQuoteUrl = `http://lamapimongodb.somee.com/api/quote/`
+const baseAlarmUrl = `https://remote-alarm-apis.herokuapp.com/`
 ///////////////////////////////////////////////mapping trang chu 
-router.get('/', function (req, res) { 
+router.get('/', function (req, res) {
   // kiem tra cookie login
   const cookies = req.cookies;
   console.log('not-signed-cookies:', cookies);
@@ -26,17 +25,14 @@ router.get('/', function (req, res) {
 
   axios.get(baseAlarmUrl + `list?uid=${cookies.uid}`)
     .then(function (response) {
-      axios.get(baseQuoteUrl+`random`)
-      .then(function (quote) {
-        res.render(__dirname + "/Home.html", { alarmList: response.data, email: cookies.email, quote:   quote.data.text.replace("/N", '<br>')})
-      })
+      res.render(__dirname + "/Home.html", { alarmList: response.data, email: cookies.email })
     })
     .catch(function (error) {
       console.log(error);
       res.redirect('/ServerError.html');
     })
     .then(function () {
-    
+
     });
 });
 
@@ -53,7 +49,7 @@ router.get('/ServerError.html', function (req, res) {
 ///////////////////////////////////////////////mapping trang not pairt
 router.get('/notPairYet', function (req, res) {
 
-   res.sendFile(path.join(__dirname + '/notPairYet.html'));
+  res.sendFile(path.join(__dirname + '/notPairYet.html'));
 });
 ///////////////////////////////////////////////mapping trang lost
 router.get('/signOut', function (req, res) {
@@ -108,7 +104,7 @@ router.post('/update.html', function (req, res) {
 
   axios({
     method: 'post',
-    url: baseAlarmUrl+'update',
+    url: baseAlarmUrl + 'update',
     data: bodyFormData,
     headers: {
       'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`,
@@ -132,7 +128,7 @@ router.post('/update.html', function (req, res) {
 router.get('/cancel/:id', function (req, res) {
   let id = req.params.id
   const cookies = req.cookies;
-  axios.get(baseAlarmUrl +`cancel?uid=${cookies.uid}&aid=${id}`)
+  axios.get(baseAlarmUrl + `cancel?uid=${cookies.uid}&aid=${id}`)
     .then(ressta => {
       console.log(`statusCode: ${ressta.statusCode}`)
       res.redirect('/');
@@ -197,7 +193,7 @@ router.post('/new.html', function (req, res) {
       } else {
         res.redirect('/ServerError.html');
       }
-     
+
     })
 });
 
