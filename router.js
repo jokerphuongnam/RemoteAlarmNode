@@ -14,6 +14,7 @@ admin.initializeApp({
 });
 
 const baseAlarmUrl = `https://remote-alarm-apis.herokuapp.com/`
+console.log(baseAlarmUrl)
 ///////////////////////////////////////////////mapping trang chu 
 router.get('/', function (req, res) {
   // kiem tra cookie login
