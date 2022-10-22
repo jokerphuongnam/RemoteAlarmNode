@@ -26,6 +26,7 @@ router.get('/', function (req, res) {
 
   axios.get(baseAlarmUrl + `list?uid=${cookies.uid}`)
     .then(function (response) {
+      console.log(response)
       res.render(__dirname + "/Home.html", { alarmList: response.data, email: cookies.email })
     })
     .catch(function (error) {
