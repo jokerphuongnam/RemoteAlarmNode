@@ -10,7 +10,7 @@ const FormData = require('form-data');
 // khoi tao firebase 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://remotealarmclock-2f98a.firebaseio.com"
+  databaseURL: "https://remotealarm-e4b87.firebaseio.com"
 });
 
 const baseAlarmUrl = `https://remotealarmapi.herokuapp.com/`
